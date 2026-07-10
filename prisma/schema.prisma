@@ -1,0 +1,39 @@
+generator client {
+    provider = "prisma-client"
+    output   = "./generated"
+}
+
+datasource db {
+    provider = "sqlite"
+}
+
+model Substance {
+    id             Int           @id @default(autoincrement())
+    date           DateTime      @default(now())
+    productName    String
+    lotNumber      String
+    materialType   String
+    unit           String
+    initialGross   Float?
+    initialTare    Float?
+    initialNet     Float
+    container      String?
+    expirationDate DateTime?
+    recievedDate   DateTime
+    transactions   Transaction[]
+}
+
+model Transaction {
+    id          Int        @id @default(autoincrement())
+    substance   Substance? @relation(fields: [substanceId], references: [id])
+    substanceId Int?
+    purpose     String
+    used        Float
+    date        DateTime   @default(now())
+}
+
+model User {
+    id             Int    @id @default(autoincrement())
+    name           String @unique
+    hashedPassword String
+}
