@@ -1,9 +1,5 @@
+import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
 import { PrismaClient } from "./generated/client";
-import { PrismaNeon } from "@prisma/adapter-neon";
-import dotenv from "dotenv";
 
-dotenv.config();
-const connectionString = `${process.env.DATABASE_URL}`;
-
-const adapter = new PrismaNeon({ connectionString });
+const adapter = new PrismaBetterSqlite3({ url: "file:./dev.db" });
 export const prisma = new PrismaClient({ adapter });

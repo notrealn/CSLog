@@ -1449,7 +1449,6 @@ export type SubstanceCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Int
    * The data used to create many Substances.
    */
   data: Prisma.SubstanceCreateManyInput | Prisma.SubstanceCreateManyInput[]
-  skipDuplicates?: boolean
 }
 
 /**
@@ -1468,7 +1467,6 @@ export type SubstanceCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Exten
    * The data used to create many Substances.
    */
   data: Prisma.SubstanceCreateManyInput | Prisma.SubstanceCreateManyInput[]
-  skipDuplicates?: boolean
 }
 
 /**

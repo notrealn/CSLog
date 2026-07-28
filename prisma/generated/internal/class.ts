@@ -19,8 +19,8 @@ const config: runtime.GetPrismaClientConfig = {
   "previewFeatures": [],
   "clientVersion": "7.8.0",
   "engineVersion": "3c6e192761c0362d496ed980de936e2f3cebcd3a",
-  "activeProvider": "postgresql",
-  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"./generated\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel Substance {\n  id             Int           @id @default(autoincrement())\n  date           DateTime      @default(now())\n  productName    String\n  lotNumber      String\n  materialType   String\n  unit           String\n  initialGross   Float?\n  initialTare    Float?\n  initialNet     Float\n  container      String?\n  expirationDate DateTime?\n  recievedDate   DateTime\n  transactions   Transaction[]\n}\n\nmodel Transaction {\n  id          Int        @id @default(autoincrement())\n  substance   Substance? @relation(fields: [substanceId], references: [id])\n  substanceId Int?\n  purpose     String\n  used        Float\n  date        DateTime   @default(now())\n}\n\nmodel User {\n  id             Int    @id @default(autoincrement())\n  name           String @unique\n  hashedPassword String\n}\n",
+  "activeProvider": "sqlite",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"./generated\"\n}\n\ndatasource db {\n  provider = \"sqlite\"\n}\n\nmodel Substance {\n  id             Int           @id @default(autoincrement())\n  date           DateTime      @default(now())\n  productName    String\n  lotNumber      String\n  materialType   String\n  unit           String\n  initialGross   Float?\n  initialTare    Float?\n  initialNet     Float\n  container      String?\n  expirationDate DateTime?\n  recievedDate   DateTime\n  transactions   Transaction[]\n}\n\nmodel Transaction {\n  id          Int        @id @default(autoincrement())\n  substance   Substance? @relation(fields: [substanceId], references: [id])\n  substanceId Int?\n  purpose     String\n  used        Float\n  date        DateTime   @default(now())\n}\n\nmodel User {\n  id             Int    @id @default(autoincrement())\n  name           String @unique\n  hashedPassword String\n}\n",
   "runtimeDataModel": {
     "models": {},
     "enums": {},
@@ -45,10 +45,10 @@ async function decodeBase64AsWasm(wasmBase64: string): Promise<WebAssembly.Modul
 }
 
 config.compilerWasm = {
-  getRuntime: async () => await import("@prisma/client/runtime/query_compiler_fast_bg.postgresql.mjs"),
+  getRuntime: async () => await import("@prisma/client/runtime/query_compiler_fast_bg.sqlite.mjs"),
 
   getQueryCompilerWasmModule: async () => {
-    const { wasm } = await import("@prisma/client/runtime/query_compiler_fast_bg.postgresql.wasm-base64.mjs")
+    const { wasm } = await import("@prisma/client/runtime/query_compiler_fast_bg.sqlite.wasm-base64.mjs")
     return await decodeBase64AsWasm(wasm)
   },
 
