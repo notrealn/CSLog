@@ -696,7 +696,8 @@ export type TransactionScalarFieldEnum = (typeof TransactionScalarFieldEnum)[key
 export const UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  hashedPassword: 'hashedPassword'
+  hashedPassword: 'hashedPassword',
+  superuser: 'superuser'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -749,6 +750,13 @@ export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+/**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 /**

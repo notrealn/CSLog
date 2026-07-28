@@ -101,7 +101,8 @@ export type TransactionScalarFieldEnum = (typeof TransactionScalarFieldEnum)[key
 export const UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  hashedPassword: 'hashedPassword'
+  hashedPassword: 'hashedPassword',
+  superuser: 'superuser'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
