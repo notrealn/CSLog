@@ -1,5 +1,5 @@
 import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
-import { PrismaClient } from "./generated/client";
+import { PrismaClient } from "./generated";
 import bcrypt from "bcryptjs";
 import "dotenv/config";
 
@@ -20,6 +20,18 @@ async function main() {
       role: "SUPERUSER",
     },
   });
+
+  const locations = ["Cage", "Waste Shelf", "Waste Bin", "Lab", "Safe", "Out"];
+
+  await Promise.all(
+    locations.map((name) =>
+      prisma.location.upsert({
+        where: { name },
+        update: {},
+        create: { name },
+      }),
+    ),
+  );
 }
 
 main();

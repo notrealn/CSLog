@@ -1,10 +1,17 @@
-// app/log-transaction/page.tsx
+// app/add-transaction/page.tsx
 import { prisma } from "@/prisma/prisma";
 import { createTransaction } from "../../actions/db";
 
 export default async function LogTransactionPage() {
-  const substances = await prisma.substance.findMany({
-    orderBy: { productName: "asc" },
+  const containers = await prisma.container.findMany({
+    include: {
+      substance: true,
+    },
+    orderBy: [{ substance: { productName: "asc" } }, { id: "asc" }],
+  });
+
+  const locations = await prisma.location.findMany({
+    orderBy: { name: "asc" },
   });
 
   return (
@@ -17,20 +24,60 @@ export default async function LogTransactionPage() {
         <form action={createTransaction} className="space-y-5">
           <div>
             <label className="mb-1 block text-sm font-medium text-slate-700">
-              Select Substance
+              Select Container
             </label>
             <select
-              name="substanceId"
+              name="containerId"
               required
               className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 bg-white"
             >
-              <option value="">-- Choose Substance (Lot Number) --</option>
-              {substances.map((s) => (
-                <option key={s.id} value={s.id}>
-                  {s.productName} (Lot: {s.lotNumber})
+              <option value="">-- Choose Container --</option>
+              {containers.map((container) => (
+                <option key={container.id} value={container.id}>
+                  {container.substance.productName} (Lot:{" "}
+                  {container.substance.lotNumber})
+                  {container.serialNumber ? ` • ${container.serialNumber}` : ``}
+                  {container.container ? ` • ${container.container}` : ``}
                 </option>
               ))}
             </select>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="mb-1 block text-sm font-medium text-slate-700">
+                From Location
+              </label>
+              <select
+                name="fromId"
+                required
+                className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 bg-white"
+              >
+                <option value="">-- Select Source --</option>
+                {locations.map((location) => (
+                  <option key={location.name} value={location.name}>
+                    {location.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="mb-1 block text-sm font-medium text-slate-700">
+                To Location
+              </label>
+              <select
+                name="toId"
+                required
+                className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 bg-white"
+              >
+                <option value="">-- Select Destination --</option>
+                {locations.map((location) => (
+                  <option key={location.name} value={location.name}>
+                    {location.name}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
 
           <div>

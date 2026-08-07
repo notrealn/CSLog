@@ -12,7 +12,9 @@ export async function createSubstance(formData: FormData) {
   const lotNumber = formData.get("lotNumber") as string;
   const materialType = formData.get("materialType") as string;
   const unit = formData.get("unit") as string;
-  const container = formData.get("container") as string;
+  const containerType = formData.get("container") as string;
+  const bin = (formData.get("bin") as string) || null;
+  const serialNumber = (formData.get("serialNumber") as string) || null;
 
   const rawGross = formData.get("initialGross") as string;
   const rawTare = formData.get("initialTare") as string;
@@ -24,11 +26,10 @@ export async function createSubstance(formData: FormData) {
   const initialTare = rawTare ? parseFloat(rawTare) : null;
   const expirationDate = rawExpiration ? new Date(rawExpiration) : null;
 
-  const recievedDate = formData.get("recievedDate")
-    ? new Date(formData.get("recievedDate") as string)
+  const receivedDate = formData.get("receivedDate")
+    ? new Date(formData.get("receivedDate") as string)
     : new Date();
 
-  // Core Net calculation logic based on your fields
   let initialNet = 0;
   if (rawNet) {
     initialNet = parseFloat(rawNet);
@@ -42,12 +43,19 @@ export async function createSubstance(formData: FormData) {
       lotNumber,
       materialType,
       unit,
-      container,
-      initialGross, // Saves as NULL in DB if empty
-      initialTare, // Saves as NULL in DB if empty
-      initialNet, // Always required
-      expirationDate, // Saves as NULL in DB if empty
-      recievedDate,
+      expirationDate,
+      receivedDate,
+      bin,
+      containers: {
+        create: {
+          serialNumber,
+          opened: false,
+          initialGross,
+          initialTare,
+          initialNet,
+          container: containerType,
+        },
+      },
     },
   });
 
@@ -57,16 +65,20 @@ export async function createSubstance(formData: FormData) {
 
 // Action: Record Transaction
 export async function createTransaction(formData: FormData) {
-  const substanceId = parseInt(formData.get("substanceId") as string);
+  const containerId = parseInt(formData.get("containerId") as string, 10);
   const purpose = formData.get("purpose") as string;
   const amount = parseFloat(formData.get("amount") as string) || 0;
+  const fromId = formData.get("fromId") as string;
+  const toId = formData.get("toId") as string;
 
   await prisma.transaction.create({
     data: {
       userId: (await getUser()).id,
-      substanceId,
+      containerId,
       purpose,
       amount,
+      fromId,
+      toId,
     },
   });
 

@@ -79,6 +79,31 @@ export default function AddSubstancePage() {
             </div>
           </div>
 
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="mb-1 block text-sm font-medium text-slate-700">
+                Container Serial
+              </label>
+              <input
+                type="text"
+                name="serialNumber"
+                className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                placeholder="Optional serial or batch ID"
+              />
+            </div>
+            <div>
+              <label className="mb-1 block text-sm font-medium text-slate-700">
+                Storage Bin
+              </label>
+              <input
+                type="text"
+                name="bin"
+                className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                placeholder="Optional shelf/bin"
+              />
+            </div>
+          </div>
+
           <hr className="border-slate-100 my-2" />
 
           {/* Core Quantity Section */}
@@ -144,7 +169,7 @@ export default function AddSubstancePage() {
               </label>
               <input
                 type="date"
-                name="recievedDate"
+                name="receivedDate"
                 required
                 className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
               />
@@ -156,7 +181,6 @@ export default function AddSubstancePage() {
               <input
                 type="date"
                 name="expirationDate"
-                required
                 className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
               />
             </div>
