@@ -1,5 +1,5 @@
 // app/add-substance/page.tsx
-import { createSubstance } from "../actions/db";
+import { createSubstance } from "../../actions/db";
 
 export default function AddSubstancePage() {
   return (
@@ -96,11 +96,11 @@ export default function AddSubstancePage() {
           </div>
 
           <div className="relative flex py-1 items-center">
-            <div className="flex-grow border-t border-slate-200"></div>
-            <span className="flex-shrink mx-4 text-xs uppercase font-bold text-slate-400 tracking-wider">
+            <div className="grow border-t border-slate-200"></div>
+            <span className="shrink mx-4 text-xs uppercase font-bold text-slate-400 tracking-wider">
               OR
             </span>
-            <div className="flex-grow border-t border-slate-200"></div>
+            <div className="grow border-t border-slate-200"></div>
           </div>
 
           <div>

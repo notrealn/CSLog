@@ -12,11 +12,12 @@ async function main() {
     update: {},
     create: {
       name: "admin",
+      initials: "ADMIN",
       hashedPassword: await bcrypt.hash(
         process.env.ADMIN_PASSWORD ?? "password",
         10,
       ),
-      superuser: true,
+      role: "SUPERUSER",
     },
   });
 }

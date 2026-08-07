@@ -4,6 +4,7 @@
 import { prisma } from "@/prisma/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { getUser } from "./session";
 
 // Action: Add Substance
 export async function createSubstance(formData: FormData) {
@@ -58,16 +59,65 @@ export async function createSubstance(formData: FormData) {
 export async function createTransaction(formData: FormData) {
   const substanceId = parseInt(formData.get("substanceId") as string);
   const purpose = formData.get("purpose") as string;
-  const used = parseFloat(formData.get("used") as string) || 0;
+  const amount = parseFloat(formData.get("amount") as string) || 0;
 
   await prisma.transaction.create({
     data: {
+      userId: (await getUser()).id,
       substanceId,
       purpose,
-      used,
+      amount,
     },
   });
 
   revalidatePath("/");
   redirect("/");
+}
+
+export async function updateTransaction(
+  formData: FormData,
+): Promise<{ success: true } | { success: false; error: string }> {
+  const transactionId = Number(formData.get("transactionId"));
+  const rawAmountReturned = formData.get("amountReturned") as string | null;
+  const amountReturned =
+    rawAmountReturned?.trim() !== ""
+      ? parseFloat(rawAmountReturned ?? "0")
+      : null;
+
+  if (
+    !transactionId ||
+    amountReturned === null ||
+    Number.isNaN(amountReturned)
+  ) {
+    return {
+      success: false,
+      error: "Please enter an amount returned value before verifying.",
+    };
+  }
+
+  const currentUser = await getUser();
+  const transaction = await prisma.transaction.findUnique({
+    where: { id: transactionId },
+    select: { userId: true },
+  });
+
+  if (!transaction) {
+    return { success: false, error: "Transaction not found." };
+  }
+
+  if (transaction.userId === currentUser.id) {
+    return { success: false, error: "You cannot verify your own transaction." };
+  }
+
+  await prisma.transaction.update({
+    where: { id: transactionId },
+    data: {
+      verifierId: currentUser.id,
+      amountReturned,
+    },
+  });
+
+  revalidatePath("/");
+  redirect("/");
+  return { success: true };
 }

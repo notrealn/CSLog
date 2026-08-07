@@ -1,6 +1,6 @@
 // app/log-transaction/page.tsx
 import { prisma } from "@/prisma/prisma";
-import { createTransaction } from "../actions/db";
+import { createTransaction } from "../../actions/db";
 
 export default async function LogTransactionPage() {
   const substances = await prisma.substance.findMany({
@@ -40,7 +40,7 @@ export default async function LogTransactionPage() {
             <input
               type="number"
               step="0.001"
-              name="used"
+              name="amount"
               required
               className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />

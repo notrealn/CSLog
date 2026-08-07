@@ -24,17 +24,27 @@ model Substance {
 }
 
 model Transaction {
-    id          Int        @id @default(autoincrement())
-    substance   Substance? @relation(fields: [substanceId], references: [id])
-    substanceId Int?
-    purpose     String
-    used        Float
-    date        DateTime   @default(now())
+    id             Int       @id @default(autoincrement())
+    substance      Substance @relation(fields: [substanceId], references: [id])
+    substanceId    Int
+    purpose        String
+    amount         Float
+    amountReturned Float?
+    date           DateTime  @default(now())
+
+    user       User  @relation("User", fields: [userId], references: [id])
+    userId     Int
+    verifier   User? @relation("Verifier", fields: [verifierId], references: [id])
+    verifierId Int?
 }
 
 model User {
-    id             Int     @id @default(autoincrement())
-    name           String  @unique
+    id             Int    @id @default(autoincrement())
+    name           String @unique
+    initials       String
     hashedPassword String
-    superuser      Boolean
+    role           String @default("REVIEWER")
+
+    used     Transaction[] @relation("User")
+    verified Transaction[] @relation("Verifier")
 }

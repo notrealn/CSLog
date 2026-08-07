@@ -6,11 +6,11 @@ CREATE TABLE "Substance" (
     "lotNumber" TEXT NOT NULL,
     "materialType" TEXT NOT NULL,
     "unit" TEXT NOT NULL,
-    "initialGross" REAL NOT NULL,
-    "initialTare" REAL NOT NULL,
+    "initialGross" REAL,
+    "initialTare" REAL,
     "initialNet" REAL NOT NULL,
-    "container" TEXT NOT NULL,
-    "expirationDate" DATETIME NOT NULL,
+    "container" TEXT,
+    "expirationDate" DATETIME,
     "recievedDate" DATETIME NOT NULL
 );
 
@@ -23,3 +23,15 @@ CREATE TABLE "Transaction" (
     "date" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT "Transaction_substanceId_fkey" FOREIGN KEY ("substanceId") REFERENCES "Substance" ("id") ON DELETE SET NULL ON UPDATE CASCADE
 );
+
+-- CreateTable
+CREATE TABLE "User" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "name" TEXT NOT NULL,
+    "initials" TEXT NOT NULL DEFAULT '',
+    "hashedPassword" TEXT NOT NULL,
+    "role" TEXT NOT NULL DEFAULT 'REVIEWER'
+);
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_name_key" ON "User"("name");

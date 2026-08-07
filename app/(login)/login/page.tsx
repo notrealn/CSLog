@@ -1,4 +1,4 @@
-import { signin } from "../actions/auth";
+import { signin } from "../../actions/auth";
 
 export default function Login() {
   return (
@@ -50,7 +50,7 @@ export default function Login() {
 
           <button
             type="submit"
-            className="flex w-full justify-center rounded-md bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900 active:bg-slate-950 transition-colors"
+            className="flex w-full justify-center rounded-md bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900 active:bg-slate-950 transition-colors"
           >
             Sign In
           </button>

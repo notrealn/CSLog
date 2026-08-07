@@ -525,9 +525,9 @@ export type SubstanceSumOrderByAggregateInput = {
   initialNet?: Prisma.SortOrder
 }
 
-export type SubstanceNullableScalarRelationFilter = {
-  is?: Prisma.SubstanceWhereInput | null
-  isNot?: Prisma.SubstanceWhereInput | null
+export type SubstanceScalarRelationFilter = {
+  is?: Prisma.SubstanceWhereInput
+  isNot?: Prisma.SubstanceWhereInput
 }
 
 export type DateTimeFieldUpdateOperationsInput = {
@@ -576,12 +576,10 @@ export type SubstanceCreateNestedOneWithoutTransactionsInput = {
   connect?: Prisma.SubstanceWhereUniqueInput
 }
 
-export type SubstanceUpdateOneWithoutTransactionsNestedInput = {
+export type SubstanceUpdateOneRequiredWithoutTransactionsNestedInput = {
   create?: Prisma.XOR<Prisma.SubstanceCreateWithoutTransactionsInput, Prisma.SubstanceUncheckedCreateWithoutTransactionsInput>
   connectOrCreate?: Prisma.SubstanceCreateOrConnectWithoutTransactionsInput
   upsert?: Prisma.SubstanceUpsertWithoutTransactionsInput
-  disconnect?: Prisma.SubstanceWhereInput | boolean
-  delete?: Prisma.SubstanceWhereInput | boolean
   connect?: Prisma.SubstanceWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.SubstanceUpdateToOneWithWhereWithoutTransactionsInput, Prisma.SubstanceUpdateWithoutTransactionsInput>, Prisma.SubstanceUncheckedUpdateWithoutTransactionsInput>
 }

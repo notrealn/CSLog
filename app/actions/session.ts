@@ -1,6 +1,8 @@
 "use server";
+import { prisma } from "@/prisma/prisma";
 import { jwtVerify, SignJWT } from "jose";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 const secretKey = process.env.SESSION_SECRET;
 const encodedKey = new TextEncoder().encode(secretKey);
@@ -24,9 +26,9 @@ export async function decrypt(session: string | undefined = "") {
   }
 }
 
-export async function createSession(userId: string) {
+export async function createSession(username: string) {
   const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
-  const session = await encrypt({ userId, expiresAt });
+  const session = await encrypt({ username, expiresAt });
   const cookieStore = await cookies();
 
   cookieStore.set("session", session, {
@@ -38,8 +40,30 @@ export async function createSession(userId: string) {
   });
 }
 
-export async function getUser() {
+export async function logout() {
+  const cookieStore = await cookies();
+
+  cookieStore.delete("session");
+
+  redirect("/login");
+}
+
+export async function getUsername() {
   const cookie = (await cookies()).get("session")?.value;
   const session = await decrypt(cookie);
-  return session?.userId;
+  return session?.username;
+}
+
+export async function getUser() {
+  const username = await getUsername();
+  if (!username) redirect("/login");
+
+  const user = await prisma.user.findUnique({
+    where: {
+      name: username as string,
+    },
+  });
+  if (!user) redirect("/login");
+
+  return user;
 }
