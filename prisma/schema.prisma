@@ -23,7 +23,6 @@ model Substance {
     unit           String
     expirationDate DateTime?
     receivedDate   DateTime
-    bin            String?
     containers     Container[]
 }
 
@@ -32,9 +31,10 @@ model Container {
     substance   Substance @relation(fields: [substanceId], references: [id])
     substanceId Int
 
+    bin          String?
     serialNumber String? @unique
 
-    opened       Boolean       @default(false)
+    // opened       Boolean       @default(false)
     initialGross Decimal?
     initialTare  Decimal?
     initialNet   Decimal
@@ -47,8 +47,14 @@ model Transaction {
     container   Container @relation(fields: [containerId], references: [id])
     containerId Int
 
-    purpose String
-    amount  Decimal
+    amountCheckedOut Decimal
+    amountUsed       Decimal?
+    amountLost       Decimal?
+    amountRemaining  Decimal?
+    newGross         Decimal?
+    purpose          String
+    description      String
+    comment          String?
 
     from   Location @relation("fromLocation", fields: [fromId], references: [name])
     fromId String

@@ -1,153 +1,244 @@
-import { redirect } from "next/navigation";
-import { getUser } from "../../actions/session";
-import { formatDate } from "../../util";
-import { getInventory } from "@/app/api/inventory/route";
-import Link from "next/link";
+"use client";
 
-export default async function InventoryPage() {
-  const user = await getUser();
+import React, { useEffect, useState } from "react";
+import {
+  getInventoryData,
+  ContainerInventoryItem,
+  InventorySummary,
+} from "./actions";
 
-  if (["SUPERUSER", "USER", "REVIEWER"].every((r) => user.role !== r)) {
-    redirect("/");
-  }
+export default function InventoryPage() {
+  const [data, setData] = useState<InventorySummary | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedLocation, setSelectedLocation] = useState<string>("ALL");
 
-  const inventoryData = await getInventory();
+  useEffect(() => {
+    loadInventory();
+  }, []);
+
+  const loadInventory = async () => {
+    try {
+      setLoading(true);
+      const summaryData = await getInventoryData();
+      setData(summaryData);
+    } catch (err) {
+      console.error("Failed to fetch inventory:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleExportJSON = () => {
+    if (!data) return;
+
+    const blob = new Blob([JSON.stringify(data, null, 2)], {
+      type: "application/json",
+    });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `inventory-export-${new Date()
+      .toISOString()
+      .slice(0, 10)}.json`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
+  const inventory = data?.inventory || [];
+
+  // Gather unique active locations across all containers for the dropdown
+  const allLocations = [
+    "ALL",
+    ...Array.from(
+      new Set(
+        inventory.flatMap((item) =>
+          item.locationBalances.map((lb) => lb.location),
+        ),
+      ),
+    ),
+  ];
+
+  const filteredInventory = inventory.filter((item) => {
+    const matchesSearch =
+      item.productName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.lotNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.serialNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.bin.toLowerCase().includes(searchTerm.toLowerCase());
+
+    const matchesLocation =
+      selectedLocation === "ALL" ||
+      item.locationBalances.some((lb) => lb.location === selectedLocation);
+
+    return matchesSearch && matchesLocation;
+  });
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div className="p-8 max-w-7xl mx-auto space-y-6 bg-gray-50 min-h-screen text-gray-800">
       {/* Header */}
-      <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
-            Inventory Tracking
+          <h1 className="text-3xl font-bold tracking-tight text-gray-900">
+            Substance Inventory
           </h1>
-          <p className="text-gray-400">
-            Click an entry to view its transactions.
+          <p className="text-sm text-gray-500">
+            Unit-level balances across Cage and active locations calculated from
+            transaction history.
           </p>
         </div>
-        <Link
-          className="mr-auto bg-slate-400 text-white font-bold p-2 rounded-lg"
-          href="/api/inventory"
+        <button
+          onClick={handleExportJSON}
+          disabled={!data}
+          className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 disabled:bg-gray-300 text-white font-medium rounded-lg shadow-sm transition flex items-center justify-center gap-2 self-start md:self-auto"
         >
-          Export to CSV
-        </Link>
-        <div className="rounded-lg border border-slate-200 bg-white px-4 py-2 shadow-sm">
-          <span className="text-xs font-medium uppercase text-slate-500">
-            Total Substances
+          <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
+            <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
+          </svg>
+          Export JSON
+        </button>
+      </div>
+
+      {/* Metrics Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="p-5 bg-white border border-gray-200 rounded-xl shadow-sm">
+          <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
+            Total Containers
           </span>
-          <p className="text-xl font-bold text-slate-900">
-            {inventoryData.length}
+          <p className="text-3xl font-extrabold text-gray-900 mt-1">
+            {inventory.length}
+          </p>
+        </div>
+        <div className="p-5 bg-white border border-gray-200 rounded-xl shadow-sm">
+          <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
+            Active Locations
+          </span>
+          <p className="text-3xl font-extrabold text-indigo-600 mt-1">
+            {Math.max(0, allLocations.length - 1)}
+          </p>
+        </div>
+        <div className="p-5 bg-white border border-gray-200 rounded-xl shadow-sm">
+          <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
+            Depleted Containers
+          </span>
+          <p className="text-3xl font-extrabold text-amber-600 mt-1">
+            {inventory.filter((i) => i.totalRemaining <= 0).length}
           </p>
         </div>
       </div>
 
-      {/* Main Table Grid Container */}
-      <div className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
-        <div className="overflow-x-auto min-w-2xl">
-          {/* Grid Header */}
-          <div className="grid grid-cols-7 border-b border-slate-200 bg-slate-50 text-xs font-semibold uppercase tracking-wider text-slate-700">
-            <div className="px-3 py-3.5">Product & Lot</div>
-            <div className="px-3 py-3.5">Type & Container</div>
-            <div className="px-3 py-3.5">Recieved / Exp.</div>
-            <div className="px-3 py-3.5 text-right">Initial Net</div>
-            <div className="px-3 py-3.5 text-right">Total Dispensed</div>
-            <div className="px-3 py-3.5 text-right">Waste (Returned)</div>
-            <div className="px-3 py-3.5 text-right">Current Net</div>
-          </div>
+      {/* Controls */}
+      <div className="flex flex-col sm:flex-row gap-4 bg-white p-4 border border-gray-200 rounded-xl shadow-sm">
+        <input
+          type="text"
+          placeholder="Search product, lot #, serial #, or bin..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+        />
+        <select
+          value={selectedLocation}
+          onChange={(e) => setSelectedLocation(e.target.value)}
+          className="px-4 py-2 border border-gray-300 rounded-lg bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        >
+          {allLocations.map((loc) => (
+            <option key={loc} value={loc}>
+              Location: {loc}
+            </option>
+          ))}
+        </select>
+      </div>
 
-          {/* Grid Body */}
-          <div className="divide-y divide-slate-200 bg-white text-sm text-slate-600">
-            {inventoryData.length === 0 ? (
-              <div className="px-3 py-10 text-center text-slate-400">
-                No substances recorded in inventory yet.
-              </div>
-            ) : (
-              inventoryData.map((s) => (
-                <Link
-                  key={s.id}
-                  href={`/inventory/${s.id}`}
-                  className="grid grid-cols-7 items-center hover:bg-slate-200/80 transition-colors cursor-pointer"
+      {/* Inventory Table */}
+      <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-x-auto">
+        {loading ? (
+          <div className="p-12 text-center text-gray-500">
+            Calculating location balances...
+          </div>
+        ) : filteredInventory.length === 0 ? (
+          <div className="p-12 text-center text-gray-500">
+            No matching inventory items found.
+          </div>
+        ) : (
+          <table className="w-full text-left text-sm text-gray-600">
+            <thead className="bg-gray-50 text-gray-700 uppercase text-xs tracking-wider border-b border-gray-200">
+              <tr>
+                <th className="px-6 py-3">Product / Material</th>
+                <th className="px-6 py-3">Lot & Serial #</th>
+                <th className="px-6 py-3">Location Breakdown</th>
+                <th className="px-6 py-3 text-right">Total Remaining</th>
+                <th className="px-6 py-3 text-right">Initial Net</th>
+                <th className="px-6 py-3">Status</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-200">
+              {filteredInventory.map((item) => (
+                <tr
+                  key={item.containerId}
+                  className="hover:bg-gray-50 transition"
                 >
-                  {/* Product Name & Lot */}
-                  <div className="whitespace-nowrap px-3 py-4">
-                    <div className="font-semibold text-slate-900">
-                      {s.productName}
+                  <td className="px-6 py-4">
+                    <div className="font-semibold text-gray-900">
+                      {item.productName}
                     </div>
-                    <div className="text-xs text-slate-500">
-                      Lot: <span className="font-mono">{s.lotNumber}</span>
+                    <div className="text-xs text-gray-400">
+                      {item.materialType}
                     </div>
-                  </div>
-
-                  {/* Material Type & Container */}
-                  <div className="whitespace-nowrap px-3 py-4">
-                    <span className="inline-flex items-center rounded-md bg-slate-100 px-2 py-1 text-xs font-medium text-slate-700">
-                      {s.materialType}
-                    </span>
-                    {s.container && (
-                      <div className="mt-1 text-xs text-slate-500">
-                        {s.container}
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Dates */}
-                  <div className="whitespace-nowrap px-3 py-4 text-xs">
-                    <div>
-                      Rec:{" "}
-                      <span className="font-medium text-slate-700">
-                        {formatDate(s.recievedDate)}
+                  </td>
+                  <td className="px-6 py-4">
+                    <div className="font-mono text-xs text-gray-800">
+                      Lot: {item.lotNumber}
+                    </div>
+                    <div className="font-mono text-xs text-gray-500">
+                      SN: {item.serialNumber}
+                    </div>
+                  </td>
+                  <td className="px-6 py-4">
+                    {item.locationBalances.length === 0 ? (
+                      <span className="text-xs text-gray-400">
+                        None (Fully Used/Lost)
                       </span>
-                    </div>
-                    {s.expirationDate ? (
-                      <div className="text-slate-500">
-                        Exp:{" "}
-                        <span className="font-medium text-slate-700">
-                          {formatDate(s.expirationDate)}
-                        </span>
-                      </div>
                     ) : (
-                      <div className="text-slate-400">Exp: N/A</div>
+                      <div className="flex flex-wrap gap-1.5">
+                        {item.locationBalances.map((lb) => (
+                          <span
+                            key={lb.location}
+                            className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-indigo-50 text-indigo-700 border border-indigo-100"
+                          >
+                            <strong className="mr-1">{lb.location}:</strong>
+                            {lb.amount.toFixed(2)} {item.unit}
+                          </span>
+                        ))}
+                      </div>
                     )}
-                  </div>
-
-                  {/* Initial Net */}
-                  <div className="whitespace-nowrap px-3 py-4 text-right font-medium text-slate-700">
-                    {+s.initialNet.toFixed(4)} {s.unit}
-                  </div>
-
-                  {/* Total Dispensed */}
-                  <div className="whitespace-nowrap px-3 py-4 text-right font-medium text-slate-600">
-                    {+s.totalDispensed.toFixed(4)} {s.unit}
-                  </div>
-
-                  {/* Total Waste (Returned) */}
-                  <div className="whitespace-nowrap px-3 py-4 text-right">
-                    <span
-                      className={`font-semibold ${
-                        s.totalWaste > 0 ? "text-amber-600" : "text-slate-400"
-                      }`}
-                    >
-                      {+s.totalWaste.toFixed(4)} {s.unit}
-                    </span>
-                  </div>
-
-                  {/* Current Net Remaining */}
-                  <div className="whitespace-nowrap px-3 py-4 text-right">
-                    <span
-                      className={`inline-flex items-center rounded-md px-2.5 py-1 text-xs font-bold ${
-                        s.currentNet <= 0
-                          ? "bg-red-100 text-red-800"
-                          : "bg-emerald-100 text-emerald-800"
-                      }`}
-                    >
-                      {+s.currentNet.toFixed(4)} {s.unit}
-                    </span>
-                  </div>
-                </Link>
-              ))
-            )}
-          </div>
-        </div>
+                  </td>
+                  <td className="px-6 py-4 text-right font-mono font-bold text-gray-900">
+                    {item.totalRemaining.toFixed(2)} {item.unit}
+                  </td>
+                  <td className="px-6 py-4 text-right font-mono text-xs text-gray-500">
+                    {item.initialNet.toFixed(2)} {item.unit}
+                  </td>
+                  <td className="px-6 py-4">
+                    {item.totalRemaining <= 0 ? (
+                      <span className="px-2 py-1 text-xs font-semibold text-red-700 bg-red-50 rounded-md">
+                        Depleted
+                      </span>
+                    ) : item.totalRemaining < item.initialNet * 0.2 ? (
+                      <span className="px-2 py-1 text-xs font-semibold text-amber-700 bg-amber-50 rounded-md">
+                        Low Stock
+                      </span>
+                    ) : (
+                      <span className="px-2 py-1 text-xs font-semibold text-emerald-700 bg-emerald-50 rounded-md">
+                        Available
+                      </span>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
     </div>
   );

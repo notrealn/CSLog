@@ -4,3 +4,7 @@ export function formatDate(date: Date) {
   const y = date.getFullYear();
   return `${d} ${m} ${y}`;
 }
+
+export function floatEquals(a: number, b: number, error = 0.001) {
+  return Math.abs(a - b) / (a + b) < error;
+}

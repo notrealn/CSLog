@@ -129,15 +129,14 @@ exports.Prisma.SubstanceScalarFieldEnum = {
   materialType: 'materialType',
   unit: 'unit',
   expirationDate: 'expirationDate',
-  receivedDate: 'receivedDate',
-  bin: 'bin'
+  receivedDate: 'receivedDate'
 };
 
 exports.Prisma.ContainerScalarFieldEnum = {
   id: 'id',
   substanceId: 'substanceId',
+  bin: 'bin',
   serialNumber: 'serialNumber',
-  opened: 'opened',
   initialGross: 'initialGross',
   initialTare: 'initialTare',
   initialNet: 'initialNet',
@@ -147,8 +146,14 @@ exports.Prisma.ContainerScalarFieldEnum = {
 exports.Prisma.TransactionScalarFieldEnum = {
   id: 'id',
   containerId: 'containerId',
+  amountCheckedOut: 'amountCheckedOut',
+  amountUsed: 'amountUsed',
+  amountLost: 'amountLost',
+  amountRemaining: 'amountRemaining',
+  newGross: 'newGross',
   purpose: 'purpose',
-  amount: 'amount',
+  description: 'description',
+  comment: 'comment',
   fromId: 'fromId',
   toId: 'toId',
   date: 'date',

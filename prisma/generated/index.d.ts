@@ -2477,7 +2477,6 @@ export namespace Prisma {
     unit: string | null
     expirationDate: Date | null
     receivedDate: Date | null
-    bin: string | null
   }
 
   export type SubstanceMaxAggregateOutputType = {
@@ -2489,7 +2488,6 @@ export namespace Prisma {
     unit: string | null
     expirationDate: Date | null
     receivedDate: Date | null
-    bin: string | null
   }
 
   export type SubstanceCountAggregateOutputType = {
@@ -2501,7 +2499,6 @@ export namespace Prisma {
     unit: number
     expirationDate: number
     receivedDate: number
-    bin: number
     _all: number
   }
 
@@ -2523,7 +2520,6 @@ export namespace Prisma {
     unit?: true
     expirationDate?: true
     receivedDate?: true
-    bin?: true
   }
 
   export type SubstanceMaxAggregateInputType = {
@@ -2535,7 +2531,6 @@ export namespace Prisma {
     unit?: true
     expirationDate?: true
     receivedDate?: true
-    bin?: true
   }
 
   export type SubstanceCountAggregateInputType = {
@@ -2547,7 +2542,6 @@ export namespace Prisma {
     unit?: true
     expirationDate?: true
     receivedDate?: true
-    bin?: true
     _all?: true
   }
 
@@ -2646,7 +2640,6 @@ export namespace Prisma {
     unit: string
     expirationDate: Date | null
     receivedDate: Date
-    bin: string | null
     _count: SubstanceCountAggregateOutputType | null
     _avg: SubstanceAvgAggregateOutputType | null
     _sum: SubstanceSumAggregateOutputType | null
@@ -2677,7 +2670,6 @@ export namespace Prisma {
     unit?: boolean
     expirationDate?: boolean
     receivedDate?: boolean
-    bin?: boolean
     containers?: boolean | Substance$containersArgs<ExtArgs>
     _count?: boolean | SubstanceCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["substance"]>
@@ -2691,7 +2683,6 @@ export namespace Prisma {
     unit?: boolean
     expirationDate?: boolean
     receivedDate?: boolean
-    bin?: boolean
   }, ExtArgs["result"]["substance"]>
 
   export type SubstanceSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2703,7 +2694,6 @@ export namespace Prisma {
     unit?: boolean
     expirationDate?: boolean
     receivedDate?: boolean
-    bin?: boolean
   }, ExtArgs["result"]["substance"]>
 
   export type SubstanceSelectScalar = {
@@ -2715,10 +2705,9 @@ export namespace Prisma {
     unit?: boolean
     expirationDate?: boolean
     receivedDate?: boolean
-    bin?: boolean
   }
 
-  export type SubstanceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "dateAdded" | "productName" | "lotNumber" | "materialType" | "unit" | "expirationDate" | "receivedDate" | "bin", ExtArgs["result"]["substance"]>
+  export type SubstanceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "dateAdded" | "productName" | "lotNumber" | "materialType" | "unit" | "expirationDate" | "receivedDate", ExtArgs["result"]["substance"]>
   export type SubstanceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     containers?: boolean | Substance$containersArgs<ExtArgs>
     _count?: boolean | SubstanceCountOutputTypeDefaultArgs<ExtArgs>
@@ -2740,7 +2729,6 @@ export namespace Prisma {
       unit: string
       expirationDate: Date | null
       receivedDate: Date
-      bin: string | null
     }, ExtArgs["result"]["substance"]>
     composites: {}
   }
@@ -3173,7 +3161,6 @@ export namespace Prisma {
     readonly unit: FieldRef<"Substance", 'String'>
     readonly expirationDate: FieldRef<"Substance", 'DateTime'>
     readonly receivedDate: FieldRef<"Substance", 'DateTime'>
-    readonly bin: FieldRef<"Substance", 'String'>
   }
     
 
@@ -3638,8 +3625,8 @@ export namespace Prisma {
   export type ContainerMinAggregateOutputType = {
     id: number | null
     substanceId: number | null
+    bin: string | null
     serialNumber: string | null
-    opened: boolean | null
     initialGross: Decimal | null
     initialTare: Decimal | null
     initialNet: Decimal | null
@@ -3649,8 +3636,8 @@ export namespace Prisma {
   export type ContainerMaxAggregateOutputType = {
     id: number | null
     substanceId: number | null
+    bin: string | null
     serialNumber: string | null
-    opened: boolean | null
     initialGross: Decimal | null
     initialTare: Decimal | null
     initialNet: Decimal | null
@@ -3660,8 +3647,8 @@ export namespace Prisma {
   export type ContainerCountAggregateOutputType = {
     id: number
     substanceId: number
+    bin: number
     serialNumber: number
-    opened: number
     initialGross: number
     initialTare: number
     initialNet: number
@@ -3689,8 +3676,8 @@ export namespace Prisma {
   export type ContainerMinAggregateInputType = {
     id?: true
     substanceId?: true
+    bin?: true
     serialNumber?: true
-    opened?: true
     initialGross?: true
     initialTare?: true
     initialNet?: true
@@ -3700,8 +3687,8 @@ export namespace Prisma {
   export type ContainerMaxAggregateInputType = {
     id?: true
     substanceId?: true
+    bin?: true
     serialNumber?: true
-    opened?: true
     initialGross?: true
     initialTare?: true
     initialNet?: true
@@ -3711,8 +3698,8 @@ export namespace Prisma {
   export type ContainerCountAggregateInputType = {
     id?: true
     substanceId?: true
+    bin?: true
     serialNumber?: true
-    opened?: true
     initialGross?: true
     initialTare?: true
     initialNet?: true
@@ -3809,8 +3796,8 @@ export namespace Prisma {
   export type ContainerGroupByOutputType = {
     id: number
     substanceId: number
+    bin: string | null
     serialNumber: string | null
-    opened: boolean
     initialGross: Decimal | null
     initialTare: Decimal | null
     initialNet: Decimal
@@ -3839,8 +3826,8 @@ export namespace Prisma {
   export type ContainerSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     substanceId?: boolean
+    bin?: boolean
     serialNumber?: boolean
-    opened?: boolean
     initialGross?: boolean
     initialTare?: boolean
     initialNet?: boolean
@@ -3853,8 +3840,8 @@ export namespace Prisma {
   export type ContainerSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     substanceId?: boolean
+    bin?: boolean
     serialNumber?: boolean
-    opened?: boolean
     initialGross?: boolean
     initialTare?: boolean
     initialNet?: boolean
@@ -3865,8 +3852,8 @@ export namespace Prisma {
   export type ContainerSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     substanceId?: boolean
+    bin?: boolean
     serialNumber?: boolean
-    opened?: boolean
     initialGross?: boolean
     initialTare?: boolean
     initialNet?: boolean
@@ -3877,15 +3864,15 @@ export namespace Prisma {
   export type ContainerSelectScalar = {
     id?: boolean
     substanceId?: boolean
+    bin?: boolean
     serialNumber?: boolean
-    opened?: boolean
     initialGross?: boolean
     initialTare?: boolean
     initialNet?: boolean
     container?: boolean
   }
 
-  export type ContainerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "substanceId" | "serialNumber" | "opened" | "initialGross" | "initialTare" | "initialNet" | "container", ExtArgs["result"]["container"]>
+  export type ContainerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "substanceId" | "bin" | "serialNumber" | "initialGross" | "initialTare" | "initialNet" | "container", ExtArgs["result"]["container"]>
   export type ContainerInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     substance?: boolean | SubstanceDefaultArgs<ExtArgs>
     transactions?: boolean | Container$transactionsArgs<ExtArgs>
@@ -3907,8 +3894,8 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       substanceId: number
+      bin: string | null
       serialNumber: string | null
-      opened: boolean
       initialGross: Prisma.Decimal | null
       initialTare: Prisma.Decimal | null
       initialNet: Prisma.Decimal
@@ -4340,8 +4327,8 @@ export namespace Prisma {
   interface ContainerFieldRefs {
     readonly id: FieldRef<"Container", 'Int'>
     readonly substanceId: FieldRef<"Container", 'Int'>
+    readonly bin: FieldRef<"Container", 'String'>
     readonly serialNumber: FieldRef<"Container", 'String'>
-    readonly opened: FieldRef<"Container", 'Boolean'>
     readonly initialGross: FieldRef<"Container", 'Decimal'>
     readonly initialTare: FieldRef<"Container", 'Decimal'>
     readonly initialNet: FieldRef<"Container", 'Decimal'>
@@ -4802,7 +4789,11 @@ export namespace Prisma {
   export type TransactionAvgAggregateOutputType = {
     id: number | null
     containerId: number | null
-    amount: Decimal | null
+    amountCheckedOut: Decimal | null
+    amountUsed: Decimal | null
+    amountLost: Decimal | null
+    amountRemaining: Decimal | null
+    newGross: Decimal | null
     userId: number | null
     verifierId: number | null
   }
@@ -4810,7 +4801,11 @@ export namespace Prisma {
   export type TransactionSumAggregateOutputType = {
     id: number | null
     containerId: number | null
-    amount: Decimal | null
+    amountCheckedOut: Decimal | null
+    amountUsed: Decimal | null
+    amountLost: Decimal | null
+    amountRemaining: Decimal | null
+    newGross: Decimal | null
     userId: number | null
     verifierId: number | null
   }
@@ -4818,8 +4813,14 @@ export namespace Prisma {
   export type TransactionMinAggregateOutputType = {
     id: number | null
     containerId: number | null
+    amountCheckedOut: Decimal | null
+    amountUsed: Decimal | null
+    amountLost: Decimal | null
+    amountRemaining: Decimal | null
+    newGross: Decimal | null
     purpose: string | null
-    amount: Decimal | null
+    description: string | null
+    comment: string | null
     fromId: string | null
     toId: string | null
     date: Date | null
@@ -4830,8 +4831,14 @@ export namespace Prisma {
   export type TransactionMaxAggregateOutputType = {
     id: number | null
     containerId: number | null
+    amountCheckedOut: Decimal | null
+    amountUsed: Decimal | null
+    amountLost: Decimal | null
+    amountRemaining: Decimal | null
+    newGross: Decimal | null
     purpose: string | null
-    amount: Decimal | null
+    description: string | null
+    comment: string | null
     fromId: string | null
     toId: string | null
     date: Date | null
@@ -4842,8 +4849,14 @@ export namespace Prisma {
   export type TransactionCountAggregateOutputType = {
     id: number
     containerId: number
+    amountCheckedOut: number
+    amountUsed: number
+    amountLost: number
+    amountRemaining: number
+    newGross: number
     purpose: number
-    amount: number
+    description: number
+    comment: number
     fromId: number
     toId: number
     date: number
@@ -4856,7 +4869,11 @@ export namespace Prisma {
   export type TransactionAvgAggregateInputType = {
     id?: true
     containerId?: true
-    amount?: true
+    amountCheckedOut?: true
+    amountUsed?: true
+    amountLost?: true
+    amountRemaining?: true
+    newGross?: true
     userId?: true
     verifierId?: true
   }
@@ -4864,7 +4881,11 @@ export namespace Prisma {
   export type TransactionSumAggregateInputType = {
     id?: true
     containerId?: true
-    amount?: true
+    amountCheckedOut?: true
+    amountUsed?: true
+    amountLost?: true
+    amountRemaining?: true
+    newGross?: true
     userId?: true
     verifierId?: true
   }
@@ -4872,8 +4893,14 @@ export namespace Prisma {
   export type TransactionMinAggregateInputType = {
     id?: true
     containerId?: true
+    amountCheckedOut?: true
+    amountUsed?: true
+    amountLost?: true
+    amountRemaining?: true
+    newGross?: true
     purpose?: true
-    amount?: true
+    description?: true
+    comment?: true
     fromId?: true
     toId?: true
     date?: true
@@ -4884,8 +4911,14 @@ export namespace Prisma {
   export type TransactionMaxAggregateInputType = {
     id?: true
     containerId?: true
+    amountCheckedOut?: true
+    amountUsed?: true
+    amountLost?: true
+    amountRemaining?: true
+    newGross?: true
     purpose?: true
-    amount?: true
+    description?: true
+    comment?: true
     fromId?: true
     toId?: true
     date?: true
@@ -4896,8 +4929,14 @@ export namespace Prisma {
   export type TransactionCountAggregateInputType = {
     id?: true
     containerId?: true
+    amountCheckedOut?: true
+    amountUsed?: true
+    amountLost?: true
+    amountRemaining?: true
+    newGross?: true
     purpose?: true
-    amount?: true
+    description?: true
+    comment?: true
     fromId?: true
     toId?: true
     date?: true
@@ -4995,8 +5034,14 @@ export namespace Prisma {
   export type TransactionGroupByOutputType = {
     id: number
     containerId: number
+    amountCheckedOut: Decimal
+    amountUsed: Decimal | null
+    amountLost: Decimal | null
+    amountRemaining: Decimal | null
+    newGross: Decimal | null
     purpose: string
-    amount: Decimal
+    description: string
+    comment: string | null
     fromId: string
     toId: string
     date: Date
@@ -5026,8 +5071,14 @@ export namespace Prisma {
   export type TransactionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     containerId?: boolean
+    amountCheckedOut?: boolean
+    amountUsed?: boolean
+    amountLost?: boolean
+    amountRemaining?: boolean
+    newGross?: boolean
     purpose?: boolean
-    amount?: boolean
+    description?: boolean
+    comment?: boolean
     fromId?: boolean
     toId?: boolean
     date?: boolean
@@ -5043,8 +5094,14 @@ export namespace Prisma {
   export type TransactionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     containerId?: boolean
+    amountCheckedOut?: boolean
+    amountUsed?: boolean
+    amountLost?: boolean
+    amountRemaining?: boolean
+    newGross?: boolean
     purpose?: boolean
-    amount?: boolean
+    description?: boolean
+    comment?: boolean
     fromId?: boolean
     toId?: boolean
     date?: boolean
@@ -5060,8 +5117,14 @@ export namespace Prisma {
   export type TransactionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     containerId?: boolean
+    amountCheckedOut?: boolean
+    amountUsed?: boolean
+    amountLost?: boolean
+    amountRemaining?: boolean
+    newGross?: boolean
     purpose?: boolean
-    amount?: boolean
+    description?: boolean
+    comment?: boolean
     fromId?: boolean
     toId?: boolean
     date?: boolean
@@ -5077,8 +5140,14 @@ export namespace Prisma {
   export type TransactionSelectScalar = {
     id?: boolean
     containerId?: boolean
+    amountCheckedOut?: boolean
+    amountUsed?: boolean
+    amountLost?: boolean
+    amountRemaining?: boolean
+    newGross?: boolean
     purpose?: boolean
-    amount?: boolean
+    description?: boolean
+    comment?: boolean
     fromId?: boolean
     toId?: boolean
     date?: boolean
@@ -5086,7 +5155,7 @@ export namespace Prisma {
     verifierId?: boolean
   }
 
-  export type TransactionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "containerId" | "purpose" | "amount" | "fromId" | "toId" | "date" | "userId" | "verifierId", ExtArgs["result"]["transaction"]>
+  export type TransactionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "containerId" | "amountCheckedOut" | "amountUsed" | "amountLost" | "amountRemaining" | "newGross" | "purpose" | "description" | "comment" | "fromId" | "toId" | "date" | "userId" | "verifierId", ExtArgs["result"]["transaction"]>
   export type TransactionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     container?: boolean | ContainerDefaultArgs<ExtArgs>
     from?: boolean | LocationDefaultArgs<ExtArgs>
@@ -5121,8 +5190,14 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       containerId: number
+      amountCheckedOut: Prisma.Decimal
+      amountUsed: Prisma.Decimal | null
+      amountLost: Prisma.Decimal | null
+      amountRemaining: Prisma.Decimal | null
+      newGross: Prisma.Decimal | null
       purpose: string
-      amount: Prisma.Decimal
+      description: string
+      comment: string | null
       fromId: string
       toId: string
       date: Date
@@ -5558,8 +5633,14 @@ export namespace Prisma {
   interface TransactionFieldRefs {
     readonly id: FieldRef<"Transaction", 'Int'>
     readonly containerId: FieldRef<"Transaction", 'Int'>
+    readonly amountCheckedOut: FieldRef<"Transaction", 'Decimal'>
+    readonly amountUsed: FieldRef<"Transaction", 'Decimal'>
+    readonly amountLost: FieldRef<"Transaction", 'Decimal'>
+    readonly amountRemaining: FieldRef<"Transaction", 'Decimal'>
+    readonly newGross: FieldRef<"Transaction", 'Decimal'>
     readonly purpose: FieldRef<"Transaction", 'String'>
-    readonly amount: FieldRef<"Transaction", 'Decimal'>
+    readonly description: FieldRef<"Transaction", 'String'>
+    readonly comment: FieldRef<"Transaction", 'String'>
     readonly fromId: FieldRef<"Transaction", 'String'>
     readonly toId: FieldRef<"Transaction", 'String'>
     readonly date: FieldRef<"Transaction", 'DateTime'>
@@ -7162,8 +7243,7 @@ export namespace Prisma {
     materialType: 'materialType',
     unit: 'unit',
     expirationDate: 'expirationDate',
-    receivedDate: 'receivedDate',
-    bin: 'bin'
+    receivedDate: 'receivedDate'
   };
 
   export type SubstanceScalarFieldEnum = (typeof SubstanceScalarFieldEnum)[keyof typeof SubstanceScalarFieldEnum]
@@ -7172,8 +7252,8 @@ export namespace Prisma {
   export const ContainerScalarFieldEnum: {
     id: 'id',
     substanceId: 'substanceId',
+    bin: 'bin',
     serialNumber: 'serialNumber',
-    opened: 'opened',
     initialGross: 'initialGross',
     initialTare: 'initialTare',
     initialNet: 'initialNet',
@@ -7186,8 +7266,14 @@ export namespace Prisma {
   export const TransactionScalarFieldEnum: {
     id: 'id',
     containerId: 'containerId',
+    amountCheckedOut: 'amountCheckedOut',
+    amountUsed: 'amountUsed',
+    amountLost: 'amountLost',
+    amountRemaining: 'amountRemaining',
+    newGross: 'newGross',
     purpose: 'purpose',
-    amount: 'amount',
+    description: 'description',
+    comment: 'comment',
     fromId: 'fromId',
     toId: 'toId',
     date: 'date',
@@ -7248,13 +7334,6 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
-    
-
-
-  /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -7325,7 +7404,6 @@ export namespace Prisma {
     unit?: StringFilter<"Substance"> | string
     expirationDate?: DateTimeNullableFilter<"Substance"> | Date | string | null
     receivedDate?: DateTimeFilter<"Substance"> | Date | string
-    bin?: StringNullableFilter<"Substance"> | string | null
     containers?: ContainerListRelationFilter
   }
 
@@ -7338,7 +7416,6 @@ export namespace Prisma {
     unit?: SortOrder
     expirationDate?: SortOrderInput | SortOrder
     receivedDate?: SortOrder
-    bin?: SortOrderInput | SortOrder
     containers?: ContainerOrderByRelationAggregateInput
   }
 
@@ -7354,7 +7431,6 @@ export namespace Prisma {
     unit?: StringFilter<"Substance"> | string
     expirationDate?: DateTimeNullableFilter<"Substance"> | Date | string | null
     receivedDate?: DateTimeFilter<"Substance"> | Date | string
-    bin?: StringNullableFilter<"Substance"> | string | null
     containers?: ContainerListRelationFilter
   }, "id">
 
@@ -7367,7 +7443,6 @@ export namespace Prisma {
     unit?: SortOrder
     expirationDate?: SortOrderInput | SortOrder
     receivedDate?: SortOrder
-    bin?: SortOrderInput | SortOrder
     _count?: SubstanceCountOrderByAggregateInput
     _avg?: SubstanceAvgOrderByAggregateInput
     _max?: SubstanceMaxOrderByAggregateInput
@@ -7387,7 +7462,6 @@ export namespace Prisma {
     unit?: StringWithAggregatesFilter<"Substance"> | string
     expirationDate?: DateTimeNullableWithAggregatesFilter<"Substance"> | Date | string | null
     receivedDate?: DateTimeWithAggregatesFilter<"Substance"> | Date | string
-    bin?: StringNullableWithAggregatesFilter<"Substance"> | string | null
   }
 
   export type ContainerWhereInput = {
@@ -7396,8 +7470,8 @@ export namespace Prisma {
     NOT?: ContainerWhereInput | ContainerWhereInput[]
     id?: IntFilter<"Container"> | number
     substanceId?: IntFilter<"Container"> | number
+    bin?: StringNullableFilter<"Container"> | string | null
     serialNumber?: StringNullableFilter<"Container"> | string | null
-    opened?: BoolFilter<"Container"> | boolean
     initialGross?: DecimalNullableFilter<"Container"> | Decimal | DecimalJsLike | number | string | null
     initialTare?: DecimalNullableFilter<"Container"> | Decimal | DecimalJsLike | number | string | null
     initialNet?: DecimalFilter<"Container"> | Decimal | DecimalJsLike | number | string
@@ -7409,8 +7483,8 @@ export namespace Prisma {
   export type ContainerOrderByWithRelationInput = {
     id?: SortOrder
     substanceId?: SortOrder
+    bin?: SortOrderInput | SortOrder
     serialNumber?: SortOrderInput | SortOrder
-    opened?: SortOrder
     initialGross?: SortOrderInput | SortOrder
     initialTare?: SortOrderInput | SortOrder
     initialNet?: SortOrder
@@ -7426,7 +7500,7 @@ export namespace Prisma {
     OR?: ContainerWhereInput[]
     NOT?: ContainerWhereInput | ContainerWhereInput[]
     substanceId?: IntFilter<"Container"> | number
-    opened?: BoolFilter<"Container"> | boolean
+    bin?: StringNullableFilter<"Container"> | string | null
     initialGross?: DecimalNullableFilter<"Container"> | Decimal | DecimalJsLike | number | string | null
     initialTare?: DecimalNullableFilter<"Container"> | Decimal | DecimalJsLike | number | string | null
     initialNet?: DecimalFilter<"Container"> | Decimal | DecimalJsLike | number | string
@@ -7438,8 +7512,8 @@ export namespace Prisma {
   export type ContainerOrderByWithAggregationInput = {
     id?: SortOrder
     substanceId?: SortOrder
+    bin?: SortOrderInput | SortOrder
     serialNumber?: SortOrderInput | SortOrder
-    opened?: SortOrder
     initialGross?: SortOrderInput | SortOrder
     initialTare?: SortOrderInput | SortOrder
     initialNet?: SortOrder
@@ -7457,8 +7531,8 @@ export namespace Prisma {
     NOT?: ContainerScalarWhereWithAggregatesInput | ContainerScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Container"> | number
     substanceId?: IntWithAggregatesFilter<"Container"> | number
+    bin?: StringNullableWithAggregatesFilter<"Container"> | string | null
     serialNumber?: StringNullableWithAggregatesFilter<"Container"> | string | null
-    opened?: BoolWithAggregatesFilter<"Container"> | boolean
     initialGross?: DecimalNullableWithAggregatesFilter<"Container"> | Decimal | DecimalJsLike | number | string | null
     initialTare?: DecimalNullableWithAggregatesFilter<"Container"> | Decimal | DecimalJsLike | number | string | null
     initialNet?: DecimalWithAggregatesFilter<"Container"> | Decimal | DecimalJsLike | number | string
@@ -7471,8 +7545,14 @@ export namespace Prisma {
     NOT?: TransactionWhereInput | TransactionWhereInput[]
     id?: IntFilter<"Transaction"> | number
     containerId?: IntFilter<"Transaction"> | number
+    amountCheckedOut?: DecimalFilter<"Transaction"> | Decimal | DecimalJsLike | number | string
+    amountUsed?: DecimalNullableFilter<"Transaction"> | Decimal | DecimalJsLike | number | string | null
+    amountLost?: DecimalNullableFilter<"Transaction"> | Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: DecimalNullableFilter<"Transaction"> | Decimal | DecimalJsLike | number | string | null
+    newGross?: DecimalNullableFilter<"Transaction"> | Decimal | DecimalJsLike | number | string | null
     purpose?: StringFilter<"Transaction"> | string
-    amount?: DecimalFilter<"Transaction"> | Decimal | DecimalJsLike | number | string
+    description?: StringFilter<"Transaction"> | string
+    comment?: StringNullableFilter<"Transaction"> | string | null
     fromId?: StringFilter<"Transaction"> | string
     toId?: StringFilter<"Transaction"> | string
     date?: DateTimeFilter<"Transaction"> | Date | string
@@ -7488,8 +7568,14 @@ export namespace Prisma {
   export type TransactionOrderByWithRelationInput = {
     id?: SortOrder
     containerId?: SortOrder
+    amountCheckedOut?: SortOrder
+    amountUsed?: SortOrderInput | SortOrder
+    amountLost?: SortOrderInput | SortOrder
+    amountRemaining?: SortOrderInput | SortOrder
+    newGross?: SortOrderInput | SortOrder
     purpose?: SortOrder
-    amount?: SortOrder
+    description?: SortOrder
+    comment?: SortOrderInput | SortOrder
     fromId?: SortOrder
     toId?: SortOrder
     date?: SortOrder
@@ -7508,8 +7594,14 @@ export namespace Prisma {
     OR?: TransactionWhereInput[]
     NOT?: TransactionWhereInput | TransactionWhereInput[]
     containerId?: IntFilter<"Transaction"> | number
+    amountCheckedOut?: DecimalFilter<"Transaction"> | Decimal | DecimalJsLike | number | string
+    amountUsed?: DecimalNullableFilter<"Transaction"> | Decimal | DecimalJsLike | number | string | null
+    amountLost?: DecimalNullableFilter<"Transaction"> | Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: DecimalNullableFilter<"Transaction"> | Decimal | DecimalJsLike | number | string | null
+    newGross?: DecimalNullableFilter<"Transaction"> | Decimal | DecimalJsLike | number | string | null
     purpose?: StringFilter<"Transaction"> | string
-    amount?: DecimalFilter<"Transaction"> | Decimal | DecimalJsLike | number | string
+    description?: StringFilter<"Transaction"> | string
+    comment?: StringNullableFilter<"Transaction"> | string | null
     fromId?: StringFilter<"Transaction"> | string
     toId?: StringFilter<"Transaction"> | string
     date?: DateTimeFilter<"Transaction"> | Date | string
@@ -7525,8 +7617,14 @@ export namespace Prisma {
   export type TransactionOrderByWithAggregationInput = {
     id?: SortOrder
     containerId?: SortOrder
+    amountCheckedOut?: SortOrder
+    amountUsed?: SortOrderInput | SortOrder
+    amountLost?: SortOrderInput | SortOrder
+    amountRemaining?: SortOrderInput | SortOrder
+    newGross?: SortOrderInput | SortOrder
     purpose?: SortOrder
-    amount?: SortOrder
+    description?: SortOrder
+    comment?: SortOrderInput | SortOrder
     fromId?: SortOrder
     toId?: SortOrder
     date?: SortOrder
@@ -7545,8 +7643,14 @@ export namespace Prisma {
     NOT?: TransactionScalarWhereWithAggregatesInput | TransactionScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Transaction"> | number
     containerId?: IntWithAggregatesFilter<"Transaction"> | number
+    amountCheckedOut?: DecimalWithAggregatesFilter<"Transaction"> | Decimal | DecimalJsLike | number | string
+    amountUsed?: DecimalNullableWithAggregatesFilter<"Transaction"> | Decimal | DecimalJsLike | number | string | null
+    amountLost?: DecimalNullableWithAggregatesFilter<"Transaction"> | Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: DecimalNullableWithAggregatesFilter<"Transaction"> | Decimal | DecimalJsLike | number | string | null
+    newGross?: DecimalNullableWithAggregatesFilter<"Transaction"> | Decimal | DecimalJsLike | number | string | null
     purpose?: StringWithAggregatesFilter<"Transaction"> | string
-    amount?: DecimalWithAggregatesFilter<"Transaction"> | Decimal | DecimalJsLike | number | string
+    description?: StringWithAggregatesFilter<"Transaction"> | string
+    comment?: StringNullableWithAggregatesFilter<"Transaction"> | string | null
     fromId?: StringWithAggregatesFilter<"Transaction"> | string
     toId?: StringWithAggregatesFilter<"Transaction"> | string
     date?: DateTimeWithAggregatesFilter<"Transaction"> | Date | string
@@ -7658,7 +7762,6 @@ export namespace Prisma {
     unit: string
     expirationDate?: Date | string | null
     receivedDate: Date | string
-    bin?: string | null
     containers?: ContainerCreateNestedManyWithoutSubstanceInput
   }
 
@@ -7671,7 +7774,6 @@ export namespace Prisma {
     unit: string
     expirationDate?: Date | string | null
     receivedDate: Date | string
-    bin?: string | null
     containers?: ContainerUncheckedCreateNestedManyWithoutSubstanceInput
   }
 
@@ -7683,7 +7785,6 @@ export namespace Prisma {
     unit?: StringFieldUpdateOperationsInput | string
     expirationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     receivedDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    bin?: NullableStringFieldUpdateOperationsInput | string | null
     containers?: ContainerUpdateManyWithoutSubstanceNestedInput
   }
 
@@ -7696,7 +7797,6 @@ export namespace Prisma {
     unit?: StringFieldUpdateOperationsInput | string
     expirationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     receivedDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    bin?: NullableStringFieldUpdateOperationsInput | string | null
     containers?: ContainerUncheckedUpdateManyWithoutSubstanceNestedInput
   }
 
@@ -7709,7 +7809,6 @@ export namespace Prisma {
     unit: string
     expirationDate?: Date | string | null
     receivedDate: Date | string
-    bin?: string | null
   }
 
   export type SubstanceUpdateManyMutationInput = {
@@ -7720,7 +7819,6 @@ export namespace Prisma {
     unit?: StringFieldUpdateOperationsInput | string
     expirationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     receivedDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    bin?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SubstanceUncheckedUpdateManyInput = {
@@ -7732,12 +7830,11 @@ export namespace Prisma {
     unit?: StringFieldUpdateOperationsInput | string
     expirationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     receivedDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    bin?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ContainerCreateInput = {
+    bin?: string | null
     serialNumber?: string | null
-    opened?: boolean
     initialGross?: Decimal | DecimalJsLike | number | string | null
     initialTare?: Decimal | DecimalJsLike | number | string | null
     initialNet: Decimal | DecimalJsLike | number | string
@@ -7749,8 +7846,8 @@ export namespace Prisma {
   export type ContainerUncheckedCreateInput = {
     id?: number
     substanceId: number
+    bin?: string | null
     serialNumber?: string | null
-    opened?: boolean
     initialGross?: Decimal | DecimalJsLike | number | string | null
     initialTare?: Decimal | DecimalJsLike | number | string | null
     initialNet: Decimal | DecimalJsLike | number | string
@@ -7759,8 +7856,8 @@ export namespace Prisma {
   }
 
   export type ContainerUpdateInput = {
+    bin?: NullableStringFieldUpdateOperationsInput | string | null
     serialNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    opened?: BoolFieldUpdateOperationsInput | boolean
     initialGross?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     initialTare?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     initialNet?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -7772,8 +7869,8 @@ export namespace Prisma {
   export type ContainerUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     substanceId?: IntFieldUpdateOperationsInput | number
+    bin?: NullableStringFieldUpdateOperationsInput | string | null
     serialNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    opened?: BoolFieldUpdateOperationsInput | boolean
     initialGross?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     initialTare?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     initialNet?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -7784,8 +7881,8 @@ export namespace Prisma {
   export type ContainerCreateManyInput = {
     id?: number
     substanceId: number
+    bin?: string | null
     serialNumber?: string | null
-    opened?: boolean
     initialGross?: Decimal | DecimalJsLike | number | string | null
     initialTare?: Decimal | DecimalJsLike | number | string | null
     initialNet: Decimal | DecimalJsLike | number | string
@@ -7793,8 +7890,8 @@ export namespace Prisma {
   }
 
   export type ContainerUpdateManyMutationInput = {
+    bin?: NullableStringFieldUpdateOperationsInput | string | null
     serialNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    opened?: BoolFieldUpdateOperationsInput | boolean
     initialGross?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     initialTare?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     initialNet?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -7804,8 +7901,8 @@ export namespace Prisma {
   export type ContainerUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     substanceId?: IntFieldUpdateOperationsInput | number
+    bin?: NullableStringFieldUpdateOperationsInput | string | null
     serialNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    opened?: BoolFieldUpdateOperationsInput | boolean
     initialGross?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     initialTare?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     initialNet?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -7813,8 +7910,14 @@ export namespace Prisma {
   }
 
   export type TransactionCreateInput = {
+    amountCheckedOut: Decimal | DecimalJsLike | number | string
+    amountUsed?: Decimal | DecimalJsLike | number | string | null
+    amountLost?: Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: Decimal | DecimalJsLike | number | string | null
+    newGross?: Decimal | DecimalJsLike | number | string | null
     purpose: string
-    amount: Decimal | DecimalJsLike | number | string
+    description: string
+    comment?: string | null
     date?: Date | string
     container: ContainerCreateNestedOneWithoutTransactionsInput
     from: LocationCreateNestedOneWithoutFromTransactionsInput
@@ -7826,8 +7929,14 @@ export namespace Prisma {
   export type TransactionUncheckedCreateInput = {
     id?: number
     containerId: number
+    amountCheckedOut: Decimal | DecimalJsLike | number | string
+    amountUsed?: Decimal | DecimalJsLike | number | string | null
+    amountLost?: Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: Decimal | DecimalJsLike | number | string | null
+    newGross?: Decimal | DecimalJsLike | number | string | null
     purpose: string
-    amount: Decimal | DecimalJsLike | number | string
+    description: string
+    comment?: string | null
     fromId: string
     toId: string
     date?: Date | string
@@ -7836,8 +7945,14 @@ export namespace Prisma {
   }
 
   export type TransactionUpdateInput = {
+    amountCheckedOut?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amountUsed?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    amountLost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    newGross?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     purpose?: StringFieldUpdateOperationsInput | string
-    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     container?: ContainerUpdateOneRequiredWithoutTransactionsNestedInput
     from?: LocationUpdateOneRequiredWithoutFromTransactionsNestedInput
@@ -7849,8 +7964,14 @@ export namespace Prisma {
   export type TransactionUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     containerId?: IntFieldUpdateOperationsInput | number
+    amountCheckedOut?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amountUsed?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    amountLost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    newGross?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     purpose?: StringFieldUpdateOperationsInput | string
-    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
     fromId?: StringFieldUpdateOperationsInput | string
     toId?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7861,8 +7982,14 @@ export namespace Prisma {
   export type TransactionCreateManyInput = {
     id?: number
     containerId: number
+    amountCheckedOut: Decimal | DecimalJsLike | number | string
+    amountUsed?: Decimal | DecimalJsLike | number | string | null
+    amountLost?: Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: Decimal | DecimalJsLike | number | string | null
+    newGross?: Decimal | DecimalJsLike | number | string | null
     purpose: string
-    amount: Decimal | DecimalJsLike | number | string
+    description: string
+    comment?: string | null
     fromId: string
     toId: string
     date?: Date | string
@@ -7871,16 +7998,28 @@ export namespace Prisma {
   }
 
   export type TransactionUpdateManyMutationInput = {
+    amountCheckedOut?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amountUsed?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    amountLost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    newGross?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     purpose?: StringFieldUpdateOperationsInput | string
-    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TransactionUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     containerId?: IntFieldUpdateOperationsInput | number
+    amountCheckedOut?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amountUsed?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    amountLost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    newGross?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     purpose?: StringFieldUpdateOperationsInput | string
-    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
     fromId?: StringFieldUpdateOperationsInput | string
     toId?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8035,20 +8174,6 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
   export type ContainerListRelationFilter = {
     every?: ContainerWhereInput
     some?: ContainerWhereInput
@@ -8073,7 +8198,6 @@ export namespace Prisma {
     unit?: SortOrder
     expirationDate?: SortOrder
     receivedDate?: SortOrder
-    bin?: SortOrder
   }
 
   export type SubstanceAvgOrderByAggregateInput = {
@@ -8089,7 +8213,6 @@ export namespace Prisma {
     unit?: SortOrder
     expirationDate?: SortOrder
     receivedDate?: SortOrder
-    bin?: SortOrder
   }
 
   export type SubstanceMinOrderByAggregateInput = {
@@ -8101,7 +8224,6 @@ export namespace Prisma {
     unit?: SortOrder
     expirationDate?: SortOrder
     receivedDate?: SortOrder
-    bin?: SortOrder
   }
 
   export type SubstanceSumOrderByAggregateInput = {
@@ -8152,7 +8274,7 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+  export type StringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | null
     notIn?: string[] | null
@@ -8163,15 +8285,7 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type DecimalNullableFilter<$PrismaModel = never> = {
@@ -8204,8 +8318,8 @@ export namespace Prisma {
   export type ContainerCountOrderByAggregateInput = {
     id?: SortOrder
     substanceId?: SortOrder
+    bin?: SortOrder
     serialNumber?: SortOrder
-    opened?: SortOrder
     initialGross?: SortOrder
     initialTare?: SortOrder
     initialNet?: SortOrder
@@ -8223,8 +8337,8 @@ export namespace Prisma {
   export type ContainerMaxOrderByAggregateInput = {
     id?: SortOrder
     substanceId?: SortOrder
+    bin?: SortOrder
     serialNumber?: SortOrder
-    opened?: SortOrder
     initialGross?: SortOrder
     initialTare?: SortOrder
     initialNet?: SortOrder
@@ -8234,8 +8348,8 @@ export namespace Prisma {
   export type ContainerMinOrderByAggregateInput = {
     id?: SortOrder
     substanceId?: SortOrder
+    bin?: SortOrder
     serialNumber?: SortOrder
-    opened?: SortOrder
     initialGross?: SortOrder
     initialTare?: SortOrder
     initialNet?: SortOrder
@@ -8250,12 +8364,21 @@ export namespace Prisma {
     initialNet?: SortOrder
   }
 
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type DecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -8324,8 +8447,14 @@ export namespace Prisma {
   export type TransactionCountOrderByAggregateInput = {
     id?: SortOrder
     containerId?: SortOrder
+    amountCheckedOut?: SortOrder
+    amountUsed?: SortOrder
+    amountLost?: SortOrder
+    amountRemaining?: SortOrder
+    newGross?: SortOrder
     purpose?: SortOrder
-    amount?: SortOrder
+    description?: SortOrder
+    comment?: SortOrder
     fromId?: SortOrder
     toId?: SortOrder
     date?: SortOrder
@@ -8336,7 +8465,11 @@ export namespace Prisma {
   export type TransactionAvgOrderByAggregateInput = {
     id?: SortOrder
     containerId?: SortOrder
-    amount?: SortOrder
+    amountCheckedOut?: SortOrder
+    amountUsed?: SortOrder
+    amountLost?: SortOrder
+    amountRemaining?: SortOrder
+    newGross?: SortOrder
     userId?: SortOrder
     verifierId?: SortOrder
   }
@@ -8344,8 +8477,14 @@ export namespace Prisma {
   export type TransactionMaxOrderByAggregateInput = {
     id?: SortOrder
     containerId?: SortOrder
+    amountCheckedOut?: SortOrder
+    amountUsed?: SortOrder
+    amountLost?: SortOrder
+    amountRemaining?: SortOrder
+    newGross?: SortOrder
     purpose?: SortOrder
-    amount?: SortOrder
+    description?: SortOrder
+    comment?: SortOrder
     fromId?: SortOrder
     toId?: SortOrder
     date?: SortOrder
@@ -8356,8 +8495,14 @@ export namespace Prisma {
   export type TransactionMinOrderByAggregateInput = {
     id?: SortOrder
     containerId?: SortOrder
+    amountCheckedOut?: SortOrder
+    amountUsed?: SortOrder
+    amountLost?: SortOrder
+    amountRemaining?: SortOrder
+    newGross?: SortOrder
     purpose?: SortOrder
-    amount?: SortOrder
+    description?: SortOrder
+    comment?: SortOrder
     fromId?: SortOrder
     toId?: SortOrder
     date?: SortOrder
@@ -8368,7 +8513,11 @@ export namespace Prisma {
   export type TransactionSumOrderByAggregateInput = {
     id?: SortOrder
     containerId?: SortOrder
-    amount?: SortOrder
+    amountCheckedOut?: SortOrder
+    amountUsed?: SortOrder
+    amountLost?: SortOrder
+    amountRemaining?: SortOrder
+    newGross?: SortOrder
     userId?: SortOrder
     verifierId?: SortOrder
   }
@@ -8531,10 +8680,6 @@ export namespace Prisma {
     set?: Date | string | null
   }
 
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
-  }
-
   export type ContainerUpdateManyWithoutSubstanceNestedInput = {
     create?: XOR<ContainerCreateWithoutSubstanceInput, ContainerUncheckedCreateWithoutSubstanceInput> | ContainerCreateWithoutSubstanceInput[] | ContainerUncheckedCreateWithoutSubstanceInput[]
     connectOrCreate?: ContainerCreateOrConnectWithoutSubstanceInput | ContainerCreateOrConnectWithoutSubstanceInput[]
@@ -8591,8 +8736,8 @@ export namespace Prisma {
     connect?: TransactionWhereUniqueInput | TransactionWhereUniqueInput[]
   }
 
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
   }
 
   export type NullableDecimalFieldUpdateOperationsInput = {
@@ -8875,20 +9020,6 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[]
@@ -8955,7 +9086,7 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | null
     notIn?: string[] | null
@@ -8966,15 +9097,7 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type NestedDecimalNullableFilter<$PrismaModel = never> = {
@@ -8999,12 +9122,21 @@ export namespace Prisma {
     not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
   }
 
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type NestedDecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -9067,8 +9199,14 @@ export namespace Prisma {
   }
 
   export type TransactionCreateWithoutFromInput = {
+    amountCheckedOut: Decimal | DecimalJsLike | number | string
+    amountUsed?: Decimal | DecimalJsLike | number | string | null
+    amountLost?: Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: Decimal | DecimalJsLike | number | string | null
+    newGross?: Decimal | DecimalJsLike | number | string | null
     purpose: string
-    amount: Decimal | DecimalJsLike | number | string
+    description: string
+    comment?: string | null
     date?: Date | string
     container: ContainerCreateNestedOneWithoutTransactionsInput
     to: LocationCreateNestedOneWithoutToTransactionsInput
@@ -9079,8 +9217,14 @@ export namespace Prisma {
   export type TransactionUncheckedCreateWithoutFromInput = {
     id?: number
     containerId: number
+    amountCheckedOut: Decimal | DecimalJsLike | number | string
+    amountUsed?: Decimal | DecimalJsLike | number | string | null
+    amountLost?: Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: Decimal | DecimalJsLike | number | string | null
+    newGross?: Decimal | DecimalJsLike | number | string | null
     purpose: string
-    amount: Decimal | DecimalJsLike | number | string
+    description: string
+    comment?: string | null
     toId: string
     date?: Date | string
     userId: number
@@ -9097,8 +9241,14 @@ export namespace Prisma {
   }
 
   export type TransactionCreateWithoutToInput = {
+    amountCheckedOut: Decimal | DecimalJsLike | number | string
+    amountUsed?: Decimal | DecimalJsLike | number | string | null
+    amountLost?: Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: Decimal | DecimalJsLike | number | string | null
+    newGross?: Decimal | DecimalJsLike | number | string | null
     purpose: string
-    amount: Decimal | DecimalJsLike | number | string
+    description: string
+    comment?: string | null
     date?: Date | string
     container: ContainerCreateNestedOneWithoutTransactionsInput
     from: LocationCreateNestedOneWithoutFromTransactionsInput
@@ -9109,8 +9259,14 @@ export namespace Prisma {
   export type TransactionUncheckedCreateWithoutToInput = {
     id?: number
     containerId: number
+    amountCheckedOut: Decimal | DecimalJsLike | number | string
+    amountUsed?: Decimal | DecimalJsLike | number | string | null
+    amountLost?: Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: Decimal | DecimalJsLike | number | string | null
+    newGross?: Decimal | DecimalJsLike | number | string | null
     purpose: string
-    amount: Decimal | DecimalJsLike | number | string
+    description: string
+    comment?: string | null
     fromId: string
     date?: Date | string
     userId: number
@@ -9148,8 +9304,14 @@ export namespace Prisma {
     NOT?: TransactionScalarWhereInput | TransactionScalarWhereInput[]
     id?: IntFilter<"Transaction"> | number
     containerId?: IntFilter<"Transaction"> | number
+    amountCheckedOut?: DecimalFilter<"Transaction"> | Decimal | DecimalJsLike | number | string
+    amountUsed?: DecimalNullableFilter<"Transaction"> | Decimal | DecimalJsLike | number | string | null
+    amountLost?: DecimalNullableFilter<"Transaction"> | Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: DecimalNullableFilter<"Transaction"> | Decimal | DecimalJsLike | number | string | null
+    newGross?: DecimalNullableFilter<"Transaction"> | Decimal | DecimalJsLike | number | string | null
     purpose?: StringFilter<"Transaction"> | string
-    amount?: DecimalFilter<"Transaction"> | Decimal | DecimalJsLike | number | string
+    description?: StringFilter<"Transaction"> | string
+    comment?: StringNullableFilter<"Transaction"> | string | null
     fromId?: StringFilter<"Transaction"> | string
     toId?: StringFilter<"Transaction"> | string
     date?: DateTimeFilter<"Transaction"> | Date | string
@@ -9174,8 +9336,8 @@ export namespace Prisma {
   }
 
   export type ContainerCreateWithoutSubstanceInput = {
+    bin?: string | null
     serialNumber?: string | null
-    opened?: boolean
     initialGross?: Decimal | DecimalJsLike | number | string | null
     initialTare?: Decimal | DecimalJsLike | number | string | null
     initialNet: Decimal | DecimalJsLike | number | string
@@ -9185,8 +9347,8 @@ export namespace Prisma {
 
   export type ContainerUncheckedCreateWithoutSubstanceInput = {
     id?: number
+    bin?: string | null
     serialNumber?: string | null
-    opened?: boolean
     initialGross?: Decimal | DecimalJsLike | number | string | null
     initialTare?: Decimal | DecimalJsLike | number | string | null
     initialNet: Decimal | DecimalJsLike | number | string
@@ -9225,8 +9387,8 @@ export namespace Prisma {
     NOT?: ContainerScalarWhereInput | ContainerScalarWhereInput[]
     id?: IntFilter<"Container"> | number
     substanceId?: IntFilter<"Container"> | number
+    bin?: StringNullableFilter<"Container"> | string | null
     serialNumber?: StringNullableFilter<"Container"> | string | null
-    opened?: BoolFilter<"Container"> | boolean
     initialGross?: DecimalNullableFilter<"Container"> | Decimal | DecimalJsLike | number | string | null
     initialTare?: DecimalNullableFilter<"Container"> | Decimal | DecimalJsLike | number | string | null
     initialNet?: DecimalFilter<"Container"> | Decimal | DecimalJsLike | number | string
@@ -9241,7 +9403,6 @@ export namespace Prisma {
     unit: string
     expirationDate?: Date | string | null
     receivedDate: Date | string
-    bin?: string | null
   }
 
   export type SubstanceUncheckedCreateWithoutContainersInput = {
@@ -9253,7 +9414,6 @@ export namespace Prisma {
     unit: string
     expirationDate?: Date | string | null
     receivedDate: Date | string
-    bin?: string | null
   }
 
   export type SubstanceCreateOrConnectWithoutContainersInput = {
@@ -9262,8 +9422,14 @@ export namespace Prisma {
   }
 
   export type TransactionCreateWithoutContainerInput = {
+    amountCheckedOut: Decimal | DecimalJsLike | number | string
+    amountUsed?: Decimal | DecimalJsLike | number | string | null
+    amountLost?: Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: Decimal | DecimalJsLike | number | string | null
+    newGross?: Decimal | DecimalJsLike | number | string | null
     purpose: string
-    amount: Decimal | DecimalJsLike | number | string
+    description: string
+    comment?: string | null
     date?: Date | string
     from: LocationCreateNestedOneWithoutFromTransactionsInput
     to: LocationCreateNestedOneWithoutToTransactionsInput
@@ -9273,8 +9439,14 @@ export namespace Prisma {
 
   export type TransactionUncheckedCreateWithoutContainerInput = {
     id?: number
+    amountCheckedOut: Decimal | DecimalJsLike | number | string
+    amountUsed?: Decimal | DecimalJsLike | number | string | null
+    amountLost?: Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: Decimal | DecimalJsLike | number | string | null
+    newGross?: Decimal | DecimalJsLike | number | string | null
     purpose: string
-    amount: Decimal | DecimalJsLike | number | string
+    description: string
+    comment?: string | null
     fromId: string
     toId: string
     date?: Date | string
@@ -9310,7 +9482,6 @@ export namespace Prisma {
     unit?: StringFieldUpdateOperationsInput | string
     expirationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     receivedDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    bin?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SubstanceUncheckedUpdateWithoutContainersInput = {
@@ -9322,7 +9493,6 @@ export namespace Prisma {
     unit?: StringFieldUpdateOperationsInput | string
     expirationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     receivedDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    bin?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type TransactionUpsertWithWhereUniqueWithoutContainerInput = {
@@ -9342,8 +9512,8 @@ export namespace Prisma {
   }
 
   export type ContainerCreateWithoutTransactionsInput = {
+    bin?: string | null
     serialNumber?: string | null
-    opened?: boolean
     initialGross?: Decimal | DecimalJsLike | number | string | null
     initialTare?: Decimal | DecimalJsLike | number | string | null
     initialNet: Decimal | DecimalJsLike | number | string
@@ -9354,8 +9524,8 @@ export namespace Prisma {
   export type ContainerUncheckedCreateWithoutTransactionsInput = {
     id?: number
     substanceId: number
+    bin?: string | null
     serialNumber?: string | null
-    opened?: boolean
     initialGross?: Decimal | DecimalJsLike | number | string | null
     initialTare?: Decimal | DecimalJsLike | number | string | null
     initialNet: Decimal | DecimalJsLike | number | string
@@ -9453,8 +9623,8 @@ export namespace Prisma {
   }
 
   export type ContainerUpdateWithoutTransactionsInput = {
+    bin?: NullableStringFieldUpdateOperationsInput | string | null
     serialNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    opened?: BoolFieldUpdateOperationsInput | boolean
     initialGross?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     initialTare?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     initialNet?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -9465,8 +9635,8 @@ export namespace Prisma {
   export type ContainerUncheckedUpdateWithoutTransactionsInput = {
     id?: IntFieldUpdateOperationsInput | number
     substanceId?: IntFieldUpdateOperationsInput | number
+    bin?: NullableStringFieldUpdateOperationsInput | string | null
     serialNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    opened?: BoolFieldUpdateOperationsInput | boolean
     initialGross?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     initialTare?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     initialNet?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -9572,8 +9742,14 @@ export namespace Prisma {
   }
 
   export type TransactionCreateWithoutUserInput = {
+    amountCheckedOut: Decimal | DecimalJsLike | number | string
+    amountUsed?: Decimal | DecimalJsLike | number | string | null
+    amountLost?: Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: Decimal | DecimalJsLike | number | string | null
+    newGross?: Decimal | DecimalJsLike | number | string | null
     purpose: string
-    amount: Decimal | DecimalJsLike | number | string
+    description: string
+    comment?: string | null
     date?: Date | string
     container: ContainerCreateNestedOneWithoutTransactionsInput
     from: LocationCreateNestedOneWithoutFromTransactionsInput
@@ -9584,8 +9760,14 @@ export namespace Prisma {
   export type TransactionUncheckedCreateWithoutUserInput = {
     id?: number
     containerId: number
+    amountCheckedOut: Decimal | DecimalJsLike | number | string
+    amountUsed?: Decimal | DecimalJsLike | number | string | null
+    amountLost?: Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: Decimal | DecimalJsLike | number | string | null
+    newGross?: Decimal | DecimalJsLike | number | string | null
     purpose: string
-    amount: Decimal | DecimalJsLike | number | string
+    description: string
+    comment?: string | null
     fromId: string
     toId: string
     date?: Date | string
@@ -9602,8 +9784,14 @@ export namespace Prisma {
   }
 
   export type TransactionCreateWithoutVerifierInput = {
+    amountCheckedOut: Decimal | DecimalJsLike | number | string
+    amountUsed?: Decimal | DecimalJsLike | number | string | null
+    amountLost?: Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: Decimal | DecimalJsLike | number | string | null
+    newGross?: Decimal | DecimalJsLike | number | string | null
     purpose: string
-    amount: Decimal | DecimalJsLike | number | string
+    description: string
+    comment?: string | null
     date?: Date | string
     container: ContainerCreateNestedOneWithoutTransactionsInput
     from: LocationCreateNestedOneWithoutFromTransactionsInput
@@ -9614,8 +9802,14 @@ export namespace Prisma {
   export type TransactionUncheckedCreateWithoutVerifierInput = {
     id?: number
     containerId: number
+    amountCheckedOut: Decimal | DecimalJsLike | number | string
+    amountUsed?: Decimal | DecimalJsLike | number | string | null
+    amountLost?: Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: Decimal | DecimalJsLike | number | string | null
+    newGross?: Decimal | DecimalJsLike | number | string | null
     purpose: string
-    amount: Decimal | DecimalJsLike | number | string
+    description: string
+    comment?: string | null
     fromId: string
     toId: string
     date?: Date | string
@@ -9666,8 +9860,14 @@ export namespace Prisma {
   export type TransactionCreateManyFromInput = {
     id?: number
     containerId: number
+    amountCheckedOut: Decimal | DecimalJsLike | number | string
+    amountUsed?: Decimal | DecimalJsLike | number | string | null
+    amountLost?: Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: Decimal | DecimalJsLike | number | string | null
+    newGross?: Decimal | DecimalJsLike | number | string | null
     purpose: string
-    amount: Decimal | DecimalJsLike | number | string
+    description: string
+    comment?: string | null
     toId: string
     date?: Date | string
     userId: number
@@ -9677,8 +9877,14 @@ export namespace Prisma {
   export type TransactionCreateManyToInput = {
     id?: number
     containerId: number
+    amountCheckedOut: Decimal | DecimalJsLike | number | string
+    amountUsed?: Decimal | DecimalJsLike | number | string | null
+    amountLost?: Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: Decimal | DecimalJsLike | number | string | null
+    newGross?: Decimal | DecimalJsLike | number | string | null
     purpose: string
-    amount: Decimal | DecimalJsLike | number | string
+    description: string
+    comment?: string | null
     fromId: string
     date?: Date | string
     userId: number
@@ -9686,8 +9892,14 @@ export namespace Prisma {
   }
 
   export type TransactionUpdateWithoutFromInput = {
+    amountCheckedOut?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amountUsed?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    amountLost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    newGross?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     purpose?: StringFieldUpdateOperationsInput | string
-    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     container?: ContainerUpdateOneRequiredWithoutTransactionsNestedInput
     to?: LocationUpdateOneRequiredWithoutToTransactionsNestedInput
@@ -9698,8 +9910,14 @@ export namespace Prisma {
   export type TransactionUncheckedUpdateWithoutFromInput = {
     id?: IntFieldUpdateOperationsInput | number
     containerId?: IntFieldUpdateOperationsInput | number
+    amountCheckedOut?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amountUsed?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    amountLost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    newGross?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     purpose?: StringFieldUpdateOperationsInput | string
-    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
     toId?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
@@ -9709,8 +9927,14 @@ export namespace Prisma {
   export type TransactionUncheckedUpdateManyWithoutFromInput = {
     id?: IntFieldUpdateOperationsInput | number
     containerId?: IntFieldUpdateOperationsInput | number
+    amountCheckedOut?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amountUsed?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    amountLost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    newGross?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     purpose?: StringFieldUpdateOperationsInput | string
-    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
     toId?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
@@ -9718,8 +9942,14 @@ export namespace Prisma {
   }
 
   export type TransactionUpdateWithoutToInput = {
+    amountCheckedOut?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amountUsed?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    amountLost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    newGross?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     purpose?: StringFieldUpdateOperationsInput | string
-    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     container?: ContainerUpdateOneRequiredWithoutTransactionsNestedInput
     from?: LocationUpdateOneRequiredWithoutFromTransactionsNestedInput
@@ -9730,8 +9960,14 @@ export namespace Prisma {
   export type TransactionUncheckedUpdateWithoutToInput = {
     id?: IntFieldUpdateOperationsInput | number
     containerId?: IntFieldUpdateOperationsInput | number
+    amountCheckedOut?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amountUsed?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    amountLost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    newGross?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     purpose?: StringFieldUpdateOperationsInput | string
-    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
     fromId?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
@@ -9741,8 +9977,14 @@ export namespace Prisma {
   export type TransactionUncheckedUpdateManyWithoutToInput = {
     id?: IntFieldUpdateOperationsInput | number
     containerId?: IntFieldUpdateOperationsInput | number
+    amountCheckedOut?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amountUsed?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    amountLost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    newGross?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     purpose?: StringFieldUpdateOperationsInput | string
-    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
     fromId?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
@@ -9751,8 +9993,8 @@ export namespace Prisma {
 
   export type ContainerCreateManySubstanceInput = {
     id?: number
+    bin?: string | null
     serialNumber?: string | null
-    opened?: boolean
     initialGross?: Decimal | DecimalJsLike | number | string | null
     initialTare?: Decimal | DecimalJsLike | number | string | null
     initialNet: Decimal | DecimalJsLike | number | string
@@ -9760,8 +10002,8 @@ export namespace Prisma {
   }
 
   export type ContainerUpdateWithoutSubstanceInput = {
+    bin?: NullableStringFieldUpdateOperationsInput | string | null
     serialNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    opened?: BoolFieldUpdateOperationsInput | boolean
     initialGross?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     initialTare?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     initialNet?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -9771,8 +10013,8 @@ export namespace Prisma {
 
   export type ContainerUncheckedUpdateWithoutSubstanceInput = {
     id?: IntFieldUpdateOperationsInput | number
+    bin?: NullableStringFieldUpdateOperationsInput | string | null
     serialNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    opened?: BoolFieldUpdateOperationsInput | boolean
     initialGross?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     initialTare?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     initialNet?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -9782,8 +10024,8 @@ export namespace Prisma {
 
   export type ContainerUncheckedUpdateManyWithoutSubstanceInput = {
     id?: IntFieldUpdateOperationsInput | number
+    bin?: NullableStringFieldUpdateOperationsInput | string | null
     serialNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    opened?: BoolFieldUpdateOperationsInput | boolean
     initialGross?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     initialTare?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     initialNet?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -9792,8 +10034,14 @@ export namespace Prisma {
 
   export type TransactionCreateManyContainerInput = {
     id?: number
+    amountCheckedOut: Decimal | DecimalJsLike | number | string
+    amountUsed?: Decimal | DecimalJsLike | number | string | null
+    amountLost?: Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: Decimal | DecimalJsLike | number | string | null
+    newGross?: Decimal | DecimalJsLike | number | string | null
     purpose: string
-    amount: Decimal | DecimalJsLike | number | string
+    description: string
+    comment?: string | null
     fromId: string
     toId: string
     date?: Date | string
@@ -9802,8 +10050,14 @@ export namespace Prisma {
   }
 
   export type TransactionUpdateWithoutContainerInput = {
+    amountCheckedOut?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amountUsed?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    amountLost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    newGross?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     purpose?: StringFieldUpdateOperationsInput | string
-    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     from?: LocationUpdateOneRequiredWithoutFromTransactionsNestedInput
     to?: LocationUpdateOneRequiredWithoutToTransactionsNestedInput
@@ -9813,8 +10067,14 @@ export namespace Prisma {
 
   export type TransactionUncheckedUpdateWithoutContainerInput = {
     id?: IntFieldUpdateOperationsInput | number
+    amountCheckedOut?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amountUsed?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    amountLost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    newGross?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     purpose?: StringFieldUpdateOperationsInput | string
-    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
     fromId?: StringFieldUpdateOperationsInput | string
     toId?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9824,8 +10084,14 @@ export namespace Prisma {
 
   export type TransactionUncheckedUpdateManyWithoutContainerInput = {
     id?: IntFieldUpdateOperationsInput | number
+    amountCheckedOut?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amountUsed?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    amountLost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    newGross?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     purpose?: StringFieldUpdateOperationsInput | string
-    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
     fromId?: StringFieldUpdateOperationsInput | string
     toId?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9836,8 +10102,14 @@ export namespace Prisma {
   export type TransactionCreateManyUserInput = {
     id?: number
     containerId: number
+    amountCheckedOut: Decimal | DecimalJsLike | number | string
+    amountUsed?: Decimal | DecimalJsLike | number | string | null
+    amountLost?: Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: Decimal | DecimalJsLike | number | string | null
+    newGross?: Decimal | DecimalJsLike | number | string | null
     purpose: string
-    amount: Decimal | DecimalJsLike | number | string
+    description: string
+    comment?: string | null
     fromId: string
     toId: string
     date?: Date | string
@@ -9847,8 +10119,14 @@ export namespace Prisma {
   export type TransactionCreateManyVerifierInput = {
     id?: number
     containerId: number
+    amountCheckedOut: Decimal | DecimalJsLike | number | string
+    amountUsed?: Decimal | DecimalJsLike | number | string | null
+    amountLost?: Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: Decimal | DecimalJsLike | number | string | null
+    newGross?: Decimal | DecimalJsLike | number | string | null
     purpose: string
-    amount: Decimal | DecimalJsLike | number | string
+    description: string
+    comment?: string | null
     fromId: string
     toId: string
     date?: Date | string
@@ -9856,8 +10134,14 @@ export namespace Prisma {
   }
 
   export type TransactionUpdateWithoutUserInput = {
+    amountCheckedOut?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amountUsed?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    amountLost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    newGross?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     purpose?: StringFieldUpdateOperationsInput | string
-    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     container?: ContainerUpdateOneRequiredWithoutTransactionsNestedInput
     from?: LocationUpdateOneRequiredWithoutFromTransactionsNestedInput
@@ -9868,8 +10152,14 @@ export namespace Prisma {
   export type TransactionUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     containerId?: IntFieldUpdateOperationsInput | number
+    amountCheckedOut?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amountUsed?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    amountLost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    newGross?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     purpose?: StringFieldUpdateOperationsInput | string
-    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
     fromId?: StringFieldUpdateOperationsInput | string
     toId?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9879,8 +10169,14 @@ export namespace Prisma {
   export type TransactionUncheckedUpdateManyWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     containerId?: IntFieldUpdateOperationsInput | number
+    amountCheckedOut?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amountUsed?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    amountLost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    newGross?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     purpose?: StringFieldUpdateOperationsInput | string
-    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
     fromId?: StringFieldUpdateOperationsInput | string
     toId?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9888,8 +10184,14 @@ export namespace Prisma {
   }
 
   export type TransactionUpdateWithoutVerifierInput = {
+    amountCheckedOut?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amountUsed?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    amountLost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    newGross?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     purpose?: StringFieldUpdateOperationsInput | string
-    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     container?: ContainerUpdateOneRequiredWithoutTransactionsNestedInput
     from?: LocationUpdateOneRequiredWithoutFromTransactionsNestedInput
@@ -9900,8 +10202,14 @@ export namespace Prisma {
   export type TransactionUncheckedUpdateWithoutVerifierInput = {
     id?: IntFieldUpdateOperationsInput | number
     containerId?: IntFieldUpdateOperationsInput | number
+    amountCheckedOut?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amountUsed?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    amountLost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    newGross?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     purpose?: StringFieldUpdateOperationsInput | string
-    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
     fromId?: StringFieldUpdateOperationsInput | string
     toId?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9911,8 +10219,14 @@ export namespace Prisma {
   export type TransactionUncheckedUpdateManyWithoutVerifierInput = {
     id?: IntFieldUpdateOperationsInput | number
     containerId?: IntFieldUpdateOperationsInput | number
+    amountCheckedOut?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amountUsed?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    amountLost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    amountRemaining?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    newGross?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     purpose?: StringFieldUpdateOperationsInput | string
-    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
     fromId?: StringFieldUpdateOperationsInput | string
     toId?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
