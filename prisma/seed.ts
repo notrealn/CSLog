@@ -1,10 +1,10 @@
-import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
 import { PrismaClient } from "./generated/client";
 import bcrypt from "bcryptjs";
 import "dotenv/config";
+import { PrismaNeon } from "@prisma/adapter-neon";
 
-const adapter = new PrismaBetterSqlite3({ url: "file:./dev.db" });
-const prisma = new PrismaClient({ adapter });
+const adapter = new PrismaNeon({ connectionString: process.env.DATABASE_URL });
+export const prisma = new PrismaClient({ adapter });
 
 async function main() {
   await prisma.user.upsert({
