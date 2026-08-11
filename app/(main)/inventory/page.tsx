@@ -1,11 +1,8 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import {
-  getInventoryData,
-  ContainerInventoryItem,
-  InventorySummary,
-} from "./actions";
+import { useEffect, useState } from "react";
+import { getInventoryData, InventorySummary } from "./actions";
+import { useRouter } from "next/navigation";
 
 export default function InventoryPage() {
   const [data, setData] = useState<InventorySummary | null>(null);
@@ -74,6 +71,8 @@ export default function InventoryPage() {
 
     return matchesSearch && matchesLocation;
   });
+
+  const router = useRouter();
 
   return (
     <div className="p-8 max-w-7xl mx-auto space-y-6 bg-gray-50 min-h-screen text-gray-800">
@@ -176,7 +175,8 @@ export default function InventoryPage() {
               {filteredInventory.map((item) => (
                 <tr
                   key={item.containerId}
-                  className="hover:bg-gray-50 transition"
+                  onClick={() => router.push(`/inventory/${item.containerId}`)}
+                  className="hover:bg-indigo-50/50 cursor-pointer transition-colors"
                 >
                   <td className="px-6 py-4">
                     <div className="font-semibold text-gray-900">

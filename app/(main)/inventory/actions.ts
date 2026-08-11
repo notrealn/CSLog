@@ -129,3 +129,63 @@ export async function getInventoryData(): Promise<InventorySummary> {
     throw new Error("Unable to retrieve inventory data.");
   }
 }
+
+export async function getContainerDetails(containerId: number) {
+  const container = await prisma.container.findUnique({
+    where: { id: containerId },
+    include: {
+      substance: true,
+      transactions: {
+        include: {
+          user: { select: { name: true, initials: true } },
+          verifier: { select: { name: true, initials: true } },
+          from: true,
+          to: true,
+        },
+        orderBy: { date: "desc" }, // Show newest transactions first
+      },
+    },
+  });
+
+  if (!container) return null;
+
+  // Serialize Prisma Decimal and Date objects into standard JSON primitives
+  return {
+    id: container.id,
+    serialNumber: container.serialNumber || "N/A",
+    bin: container.bin || "N/A",
+    containerType: container.container || "N/A",
+    initialNet: Number(container.initialNet),
+    initialGross: container.initialGross
+      ? Number(container.initialGross)
+      : null,
+    initialTare: container.initialTare ? Number(container.initialTare) : null,
+    substance: {
+      productName: container.substance.productName,
+      lotNumber: container.substance.lotNumber,
+      materialType: container.substance.materialType,
+      unit: container.substance.unit,
+      receivedDate: container.substance.receivedDate.toISOString(),
+      expirationDate: container.substance.expirationDate
+        ? container.substance.expirationDate.toISOString()
+        : null,
+    },
+    transactions: container.transactions.map((tx) => ({
+      id: tx.id,
+      date: tx.date.toISOString(),
+      amountCheckedOut: Number(tx.amountCheckedOut),
+      amountUsed: tx.amountUsed !== null ? Number(tx.amountUsed) : null,
+      amountLost: tx.amountLost !== null ? Number(tx.amountLost) : null,
+      amountRemaining:
+        tx.amountRemaining !== null ? Number(tx.amountRemaining) : null,
+      newGross: tx.newGross !== null ? Number(tx.newGross) : null,
+      purpose: tx.purpose,
+      description: tx.description,
+      comment: tx.comment,
+      fromLocation: tx.fromId,
+      toLocation: tx.toId,
+      operatorName: tx.user.name,
+      verifierName: tx.verifier ? tx.verifier.name : null,
+    })),
+  };
+}
