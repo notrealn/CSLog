@@ -1,290 +1,197 @@
-import { prisma } from "@/prisma/prisma";
+// app/inventory/[id]/page.tsx
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { formatDate } from "../../../util";
-import { getUser } from "../../../actions/session";
-import { EditableField } from "./field";
+import { getContainerDetails } from "../actions";
 
-export default async function Page(props: PageProps<"/inventory/[id]">) {
-  const { id } = await props.params;
-  const substanceId = parseInt(id, 10);
+interface Props {
+  params: Promise<{ id: string }>;
+}
 
-  if (isNaN(substanceId)) {
+export default async function ContainerDetailPage({ params }: Props) {
+  const { id } = await params;
+  const containerId = Number(id);
+
+  if (isNaN(containerId)) {
     notFound();
   }
 
-  const user = await getUser();
-  const isSuperuser = user?.role === "SUPERUSER";
+  const container = await getContainerDetails(containerId);
 
-  const substance = await prisma.substance.findUnique({
-    where: { id: substanceId },
-    include: {
-      transactions: {
-        orderBy: { date: "desc" },
-        include: {
-          user: true,
-          verifier: true,
-        },
-      },
-    },
-  });
+  if (!container) {
+    notFound();
+  }
 
-  if (!substance) {
-    return (
-      <div className="mx-auto max-w-7xl px-4 py-16 text-center">
-        <h2 className="text-xl font-bold text-slate-800">
-          Substance Not Found
-        </h2>
-        <p className="mt-2 text-slate-500">
-          No substance exists with ID #{id}.
-        </p>
+  return (
+    <div className="p-8 max-w-7xl mx-auto space-y-6 bg-gray-50 min-h-screen text-gray-800">
+      {/* Back Button */}
+      <div>
         <Link
           href="/inventory"
-          className="mt-4 inline-block rounded-lg bg-slate-800 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-700"
+          className="inline-flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-800 transition-colors"
         >
           ← Back to Inventory
         </Link>
       </div>
-    );
-  }
 
-  // Calculate transaction totals
-  const totalDispensed = substance.transactions.reduce(
-    (acc, t) => acc + t.amount,
-    0,
-  );
-  const totalReturned = substance.transactions.reduce(
-    (acc, t) => acc + (t.amountReturned ?? 0),
-    0,
-  );
-  const currentNet = substance.initialNet - totalDispensed + totalReturned;
-
-  return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-      {/* Navigation Header */}
-      <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <Link
-            href="/inventory"
-            className="text-xs font-semibold uppercase tracking-wider text-slate-500 hover:text-slate-800"
-          >
-            ← Back to Inventory
-          </Link>
-          <h1 className="mt-1 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
-            <EditableField
-              substanceId={substance.id}
-              fieldName="productName"
-              value={substance.productName}
-              isSuperuser={isSuperuser}
-            />
-          </h1>
-          <div className="text-sm text-slate-500 flex items-center gap-1">
-            Lot Number:{" "}
-            <span className="font-mono font-medium">
-              <EditableField
-                substanceId={substance.id}
-                fieldName="lotNumber"
-                value={substance.lotNumber}
-                isSuperuser={isSuperuser}
-              />
-            </span>
-          </div>
-        </div>
-
-        <div className="flex gap-3">
-          <div className="rounded-lg border border-slate-200 bg-white px-4 py-2 shadow-sm">
-            <span className="text-xs font-medium uppercase text-slate-500">
-              Initial Net
-            </span>
-            <div className="text-xl font-bold text-slate-900">
-              <EditableField
-                substanceId={substance.id}
-                fieldName="initialNet"
-                value={substance.initialNet}
-                isSuperuser={isSuperuser}
-                type="number"
-                unit={substance.unit}
-              />
+      {/* Container Header Details */}
+      <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm space-y-4">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-gray-100 pb-4">
+          <div>
+            <div className="flex items-center gap-2">
+              <h1 className="text-2xl font-bold text-gray-900">
+                {container.substance.productName}
+              </h1>
+              <span className="px-2.5 py-0.5 text-xs font-semibold rounded-md bg-indigo-50 text-indigo-700 border border-indigo-100">
+                {container.substance.materialType}
+              </span>
             </div>
+            <p className="text-xs text-gray-500 mt-1">
+              Container ID #{container.id} • Lot:{" "}
+              {container.substance.lotNumber} • SN: {container.serialNumber}
+            </p>
           </div>
-          <div className="rounded-lg border border-slate-200 bg-white px-4 py-2 shadow-sm">
-            <span className="text-xs font-medium uppercase text-slate-500">
-              Current Net
-            </span>
-            <div
-              className={`text-xl font-bold ${
-                currentNet <= 0 ? "text-red-600" : "text-emerald-600"
-              }`}
-            >
-              {+currentNet.toFixed(4)} {substance.unit}
+
+          <div className="flex items-center gap-3">
+            <div className="text-right">
+              <span className="text-xs font-semibold text-gray-400 uppercase">
+                Initial Net
+              </span>
+              <p className="text-lg font-bold font-mono text-gray-900">
+                {container.initialNet.toFixed(2)} {container.substance.unit}
+              </p>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Substance Details Card */}
-      <div className="mb-8 rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
-        <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-slate-500">
-          Substance Details
-        </h2>
-        <dl className="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 md:grid-cols-4 text-sm">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs">
           <div>
-            <dt className="text-xs text-slate-400">Material Type</dt>
-            <dd>
-              <EditableField
-                substanceId={substance.id}
-                fieldName="materialType"
-                value={substance.materialType}
-                isSuperuser={isSuperuser}
-              />
-            </dd>
+            <span className="text-gray-400 block font-medium">
+              Container Type
+            </span>
+            <span className="font-semibold text-gray-800">
+              {container.containerType}
+            </span>
           </div>
           <div>
-            <dt className="text-xs text-slate-400">Container</dt>
-            <dd>
-              <EditableField
-                substanceId={substance.id}
-                fieldName="container"
-                value={substance.container}
-                isSuperuser={isSuperuser}
-              />
-            </dd>
+            <span className="text-gray-400 block font-medium">Storage Bin</span>
+            <span className="font-semibold text-gray-800">{container.bin}</span>
           </div>
           <div>
-            <dt className="text-xs text-slate-400">Received Date</dt>
-            <dd className="font-medium text-slate-800">
-              {formatDate(substance.recievedDate)}
-            </dd>
+            <span className="text-gray-400 block font-medium">
+              Received Date
+            </span>
+            <span className="font-semibold text-gray-800">
+              {new Date(container.substance.receivedDate).toLocaleDateString()}
+            </span>
           </div>
           <div>
-            <dt className="text-xs text-slate-400">Expiration Date</dt>
-            <dd className="font-medium text-slate-800">
-              {substance.expirationDate
-                ? formatDate(substance.expirationDate)
+            <span className="text-gray-400 block font-medium">
+              Expiration Date
+            </span>
+            <span className="font-semibold text-gray-800">
+              {container.substance.expirationDate
+                ? new Date(
+                    container.substance.expirationDate,
+                  ).toLocaleDateString()
                 : "N/A"}
-            </dd>
+            </span>
           </div>
-          <div>
-            <dt className="text-xs text-slate-400">Initial Gross Weight</dt>
-            <dd>
-              <EditableField
-                substanceId={substance.id}
-                fieldName="initialGross"
-                value={substance.initialGross}
-                isSuperuser={isSuperuser}
-                type="number"
-                unit={substance.unit}
-              />
-            </dd>
-          </div>
-          <div>
-            <dt className="text-xs text-slate-400">Initial Tare Weight</dt>
-            <dd>
-              <EditableField
-                substanceId={substance.id}
-                fieldName="initialTare"
-                value={substance.initialTare}
-                isSuperuser={isSuperuser}
-                type="number"
-                unit={substance.unit}
-              />
-            </dd>
-          </div>
-          <div>
-            <dt className="text-xs text-slate-400">Total Dispensed</dt>
-            <dd className="font-medium text-slate-800">
-              {+totalDispensed.toFixed(4)} {substance.unit}
-            </dd>
-          </div>
-          <div>
-            <dt className="text-xs text-slate-400">Total Returned / Waste</dt>
-            <dd className="font-medium text-amber-600">
-              {+totalReturned.toFixed(4)} {substance.unit}
-            </dd>
-          </div>
-        </dl>
+        </div>
       </div>
 
-      {/* Transactions Table */}
-      <div className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
-        <div className="border-b border-slate-200 bg-slate-50 px-6 py-4">
-          <h2 className="text-lg font-bold text-slate-900">
-            Transaction History ({substance.transactions.length})
+      {/* Transactions History Table */}
+      <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+        <div className="p-5 border-b border-gray-200 bg-gray-50/50 flex items-center justify-between">
+          <h2 className="text-base font-bold text-gray-900">
+            Transaction History ({container.transactions.length})
           </h2>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm text-slate-600">
-            <thead className="border-b border-slate-200 bg-slate-50 text-xs font-semibold uppercase tracking-wider text-slate-700">
-              <tr>
-                <th scope="col" className="px-4 py-3.5">
-                  Date
-                </th>
-                <th scope="col" className="px-4 py-3.5">
-                  Purpose
-                </th>
-                <th scope="col" className="px-4 py-3.5">
-                  Performed By
-                </th>
-                <th scope="col" className="px-4 py-3.5">
-                  Verified By
-                </th>
-                <th scope="col" className="px-4 py-3.5 text-right">
-                  Dispensed
-                </th>
-                <th scope="col" className="px-4 py-3.5 text-right">
-                  Returned
-                </th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-200 bg-white">
-              {substance.transactions.length === 0 ? (
+        {container.transactions.length === 0 ? (
+          <div className="p-12 text-center text-gray-500 text-sm">
+            No transactions logged for this container yet.
+          </div>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-xs text-gray-600">
+              <thead className="bg-gray-50 text-gray-700 uppercase tracking-wider border-b border-gray-200">
                 <tr>
-                  <td
-                    colSpan={6}
-                    className="px-4 py-10 text-center text-slate-400"
-                  >
-                    No transactions logged for this substance.
-                  </td>
+                  <th className="px-4 py-3">Date & Time</th>
+                  <th className="px-4 py-3">Movement</th>
+                  <th className="px-4 py-3 text-right">Checked Out</th>
+                  <th className="px-4 py-3 text-right">Used</th>
+                  <th className="px-4 py-3 text-right">Lost</th>
+                  <th className="px-4 py-3 text-right">Remaining</th>
+                  <th className="px-4 py-3">Purpose & Description</th>
+                  <th className="px-4 py-3">Operator / Witness</th>
                 </tr>
-              ) : (
-                substance.transactions.map((t) => (
+              </thead>
+              <tbody className="divide-y divide-gray-200">
+                {container.transactions.map((tx) => (
                   <tr
-                    key={t.id}
-                    className="hover:bg-slate-50/80 transition-colors"
+                    key={tx.id}
+                    className="hover:bg-gray-50/80 transition-colors"
                   >
-                    <td className="whitespace-nowrap px-4 py-4 text-xs font-medium text-slate-700">
-                      {formatDate(t.date)}
+                    <td className="px-4 py-3 whitespace-nowrap font-mono text-gray-500">
+                      {new Date(tx.date).toLocaleString()}
                     </td>
-                    <td className="px-4 py-4 text-slate-900 font-medium">
-                      {t.purpose}
+                    <td className="px-4 py-3 whitespace-nowrap">
+                      <span className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium bg-gray-100 text-gray-800 border border-gray-200">
+                        {tx.fromLocation} → {tx.toLocation}
+                      </span>
                     </td>
-                    <td className="whitespace-nowrap px-4 py-4 text-xs">
-                      {t.user.initials}
+                    <td className="px-4 py-3 text-right font-mono font-bold text-gray-900">
+                      {tx.amountCheckedOut.toFixed(2)}{" "}
+                      {container.substance.unit}
                     </td>
-                    <td className="whitespace-nowrap px-4 py-4 text-xs text-slate-500">
-                      {t.verifier ? t.verifier.initials : "-"}
+                    <td className="px-4 py-3 text-right font-mono text-gray-700">
+                      {tx.amountUsed !== null
+                        ? `${tx.amountUsed.toFixed(2)} ${container.substance.unit}`
+                        : "—"}
                     </td>
-                    <td className="whitespace-nowrap px-4 py-4 text-right font-medium text-slate-700">
-                      -{+t.amount.toFixed(4)} {substance.unit}
+                    <td className="px-4 py-3 text-right font-mono text-amber-700">
+                      {tx.amountLost !== null
+                        ? `${tx.amountLost.toFixed(2)} ${container.substance.unit}`
+                        : "—"}
                     </td>
-                    <td className="whitespace-nowrap px-4 py-4 text-right">
-                      {t.amountReturned && t.amountReturned > 0 ? (
-                        <span className="font-semibold text-amber-600">
-                          +{+t.amountReturned.toFixed(4)} {substance.unit}
-                        </span>
+                    <td className="px-4 py-3 text-right font-mono text-emerald-700 font-semibold">
+                      {tx.amountRemaining !== null
+                        ? `${tx.amountRemaining.toFixed(2)} ${container.substance.unit}`
+                        : "—"}
+                    </td>
+                    <td className="px-4 py-3 max-w-xs">
+                      <div className="font-semibold text-gray-800">
+                        {tx.purpose}
+                      </div>
+                      <div className="text-gray-500 truncate">
+                        {tx.description}
+                      </div>
+                      {tx.comment && (
+                        <div className="text-[10px] text-gray-400 italic mt-0.5">
+                          "{tx.comment}"
+                        </div>
+                      )}
+                    </td>
+                    <td className="px-4 py-3 whitespace-nowrap">
+                      <div className="font-medium text-gray-900">
+                        {tx.operatorName}
+                      </div>
+                      {tx.verifierName ? (
+                        <div className="text-[10px] text-emerald-600 font-medium">
+                          ✓ Witness: {tx.verifierName}
+                        </div>
                       ) : (
-                        <span className="text-slate-400">
-                          0 {substance.unit}
-                        </span>
+                        <div className="text-[10px] text-amber-600 font-medium">
+                          ⏳ Pending Verification
+                        </div>
                       )}
                     </td>
                   </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     </div>
   );
