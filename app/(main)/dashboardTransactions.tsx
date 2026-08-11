@@ -52,8 +52,8 @@ export function DashboardTransactions({
               <p className="mt-1 text-xs text-slate-500">
                 Checked out by{" "}
                 <strong className="text-slate-700">{tx.user.name}</strong> •{" "}
-                {new Date(tx.date).toLocaleString()} • From: {tx.fromId}{" "}
-                $\rightarrow$ To: {tx.toId}
+                {new Date(tx.date).toLocaleString()} • From: {tx.fromId} → To:{" "}
+                {tx.toId}
               </p>
             </div>
 
