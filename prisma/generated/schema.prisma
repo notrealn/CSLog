@@ -1,0 +1,80 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Location {
+  name String @id
+
+  fromTransactions Transaction[] @relation("fromLocation")
+  toTransactions   Transaction[] @relation("toLocation")
+}
+
+model Substance {
+  id             Int         @id @default(autoincrement())
+  dateAdded      DateTime    @default(now())
+  productName    String
+  lotNumber      String
+  materialType   String
+  unit           String
+  expirationDate DateTime?
+  receivedDate   DateTime
+  containers     Container[]
+}
+
+model Container {
+  id          Int       @id @default(autoincrement())
+  substance   Substance @relation(fields: [substanceId], references: [id])
+  substanceId Int
+
+  bin          String?
+  serialNumber String? @unique
+
+  // opened       Boolean       @default(false)
+  initialGross Decimal?
+  initialTare  Decimal?
+  initialNet   Decimal
+  container    String?
+  transactions Transaction[]
+}
+
+model Transaction {
+  id          Int       @id @default(autoincrement())
+  container   Container @relation(fields: [containerId], references: [id])
+  containerId Int
+
+  amountCheckedOut Decimal
+  amountUsed       Decimal?
+  amountLost       Decimal?
+  amountRemaining  Decimal?
+  newGross         Decimal?
+  purpose          String
+  description      String
+  comment          String?
+
+  from   Location @relation("fromLocation", fields: [fromId], references: [name])
+  fromId String
+  to     Location @relation("toLocation", fields: [toId], references: [name])
+  toId   String
+
+  date       DateTime @default(now())
+  user       User     @relation("user", fields: [userId], references: [id])
+  userId     Int
+  verifier   User?    @relation("verifier", fields: [verifierId], references: [id])
+  verifierId Int?
+}
+
+model User {
+  id             Int    @id @default(autoincrement())
+  name           String @unique
+  initials       String
+  hashedPassword String
+  role           String @default("REVIEWER")
+
+  used     Transaction[] @relation("user")
+  verified Transaction[] @relation("verifier")
+}

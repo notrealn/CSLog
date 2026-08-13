@@ -24,13 +24,6 @@ export type SerializedContainer = Omit<
   transactions: SerializedTransaction[];
 };
 
-export interface ContainerInventoryItem extends SerializedContainer {
-  substance: Substance;
-  totalRemaining: number;
-  locationBalances: LocationBalance[];
-  transactionCount: number;
-}
-
 export interface SerializedTransaction extends Omit<
   Transaction,
   | "amountCheckedOut"
@@ -54,6 +47,13 @@ export interface SerializedTransaction extends Omit<
   verifierInitials?: string;
 }
 
+export interface ContainerInventoryItem extends SerializedContainer {
+  substance: Substance;
+  totalRemaining: number;
+  locationBalances: LocationBalance[];
+  transactionCount: number;
+}
+
 export interface InventorySummary {
   exportedAt: string;
   summary: {
@@ -62,6 +62,11 @@ export interface InventorySummary {
     locationBreakdown: Record<string, number>;
   };
   inventory: ContainerInventoryItem[];
+}
+
+export interface SerializedUser {
+  name: string;
+  initials?: string;
 }
 
 export async function getInventoryData(): Promise<InventorySummary> {
@@ -131,8 +136,8 @@ function combineTransactions(
     transactions: (Transaction & {
       from: Location;
       to: Location;
-      user: User;
-      verifier: User | null;
+      user: SerializedUser;
+      verifier: SerializedUser | null;
     })[];
   } & Container,
   substance: Substance,
