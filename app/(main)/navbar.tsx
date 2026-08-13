@@ -45,12 +45,20 @@ export async function Navbar() {
           My Account
         </Link>
         {user.role === "SUPERUSER" && (
-          <Link
-            href="/manage-users"
-            className="rounded-md bg-gray-500 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-700 transition-colors"
-          >
-            Manage Users
-          </Link>
+          <>
+            <Link
+              href="/manage-users"
+              className="rounded-md bg-gray-500 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-700 transition-colors"
+            >
+              Manage Users
+            </Link>
+            <Link
+              href="/dea-dashboard"
+              className="rounded-md bg-gray-500 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-700 transition-colors"
+            >
+              Verify Transactions (Admin)
+            </Link>
+          </>
         )}
       </div>
     </nav>
