@@ -1,11 +1,14 @@
 // app/add-substance/actions.ts
 "use server";
 
-import { prisma } from "@/prisma/prisma"; // or @prisma/client if using default location
-// import { Decimal } from "@prisma/client/runtime/library";
+import { prisma } from "@/prisma/prisma";
+import { Decimal } from "@prisma/client-runtime-utils";
 import { redirect } from "next/navigation";
 
-export async function createSubstance(formData: FormData) {
+export async function createSubstance(
+  _prev: string | undefined,
+  formData: FormData,
+): Promise<string | undefined> {
   const productName = formData.get("productName") as string;
   const lotNumber = formData.get("lotNumber") as string;
   const unit = formData.get("unit") as string;
@@ -28,7 +31,7 @@ export async function createSubstance(formData: FormData) {
   );
 
   if (containerIndices.length === 0) {
-    throw new Error("At least one container must be provided.");
+    return "At least one container must be provided.";
   }
 
   // Execute nested creation in a single transaction
@@ -68,19 +71,26 @@ export async function createSubstance(formData: FormData) {
       ) as string;
 
       let initialNet;
-      let initialGross: number | null = null;
-      let initialTare: number | null = null;
+      let initialGross: Decimal | null = null;
+      let initialTare: Decimal | null = null;
 
       if (directNetRaw && directNetRaw.trim() !== "") {
-        initialNet = parseFloat(directNetRaw);
+        initialNet = new Decimal(directNetRaw);
       } else if (grossRaw && tareRaw) {
-        initialGross = parseFloat(grossRaw);
-        initialTare = parseFloat(tareRaw);
-        initialNet = initialGross - initialTare;
+        initialGross = new Decimal(grossRaw);
+        initialTare = new Decimal(tareRaw);
+
+        const calcNet = initialGross.minus(initialTare);
+        if (initialNet) {
+          const diff = calcNet.minus(initialNet).div(initialNet).abs();
+          if (diff.lessThan(0.01)) initialNet = calcNet;
+          else
+            return `initial net and gross minus tare differ by ${diff.toNumber() * 100}%`;
+        } else {
+          initialNet = calcNet;
+        }
       } else {
-        throw new Error(
-          `Container ${Number(index) + 1} must provide either Direct Net OR Gross & Tare.`,
-        );
+        return `Container ${Number(index) + 1} must provide either Direct Net OR Gross & Tare.`;
       }
 
       await tx.container.create({

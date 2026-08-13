@@ -5,9 +5,16 @@ import { createSession } from "./session";
 import { redirect } from "next/navigation";
 import bcrypt from "bcryptjs";
 
-export async function signin(formData: FormData) {
+export async function signin(
+  _prev: string | undefined,
+  formData: FormData,
+): Promise<string | undefined> {
   const name = formData.get("name") as string;
   const password = formData.get("password") as string;
+
+  if (!name || !password) {
+    return "Please provide both name and password.";
+  }
 
   const user = await prisma.user.findUnique({ where: { name } });
 
@@ -18,7 +25,7 @@ export async function signin(formData: FormData) {
   ) {
     await createSession(name);
     redirect("/");
-  } else {
-    return;
   }
+
+  return "Invalid name or password.";
 }

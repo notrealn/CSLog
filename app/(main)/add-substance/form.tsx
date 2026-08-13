@@ -1,7 +1,7 @@
 // app/add-substance/substance-form.tsx
 "use client";
 
-import { useState } from "react";
+import { useState, useActionState } from "react";
 import { createSubstance } from "./actions";
 
 interface ContainerField {
@@ -9,6 +9,11 @@ interface ContainerField {
 }
 
 export default function SubstanceForm() {
+  const [state, formAction, isPending] = useActionState(
+    createSubstance,
+    undefined,
+  );
+
   const [containers, setContainers] = useState<ContainerField[]>([
     { id: crypto.randomUUID() },
   ]);
@@ -23,7 +28,14 @@ export default function SubstanceForm() {
   };
 
   return (
-    <form action={createSubstance} className="space-y-6">
+    <form action={formAction} className="space-y-6">
+      {/* Error Display Banner */}
+      {state && (
+        <div className="rounded-md bg-red-50 p-3.5 text-xs font-semibold text-red-700 border border-red-200">
+          ⚠️ {state}
+        </div>
+      )}
+
       {/* --- Substance Level Details --- */}
       <div className="space-y-4 rounded-md border border-slate-200 bg-slate-50/50 p-4">
         <h3 className="text-sm font-bold uppercase tracking-wider text-slate-600">
@@ -239,9 +251,10 @@ export default function SubstanceForm() {
 
       <button
         type="submit"
-        className="w-full rounded-md bg-slate-900 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-slate-800 shadow-sm"
+        disabled={isPending}
+        className="w-full rounded-md bg-slate-900 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-slate-800 shadow-sm disabled:bg-slate-400 disabled:cursor-not-allowed"
       >
-        Save Inventory Record
+        {isPending ? "Saving Record..." : "Save Inventory Record"}
       </button>
     </form>
   );
