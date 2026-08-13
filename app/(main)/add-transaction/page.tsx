@@ -1,6 +1,7 @@
 // app/add-transaction/page.tsx
 import { prisma } from "@/prisma/prisma";
 import TransactionForm from "./form";
+import { getUser } from "@/app/actions/session";
 
 export default async function LogTransactionPage() {
   const rawContainers = await prisma.container.findMany({
@@ -10,12 +11,6 @@ export default async function LogTransactionPage() {
 
   const rawLocations = await prisma.location.findMany({
     orderBy: { name: "asc" },
-  });
-
-  // Fetch logged in user from session/auth (mocked to ID 1 for demonstration)
-  const currentUser = await prisma.user.findFirstOrThrow({
-    where: { id: 1 },
-    select: { id: true, name: true },
   });
 
   const containers = rawContainers.map((c) => ({
@@ -42,7 +37,7 @@ export default async function LogTransactionPage() {
         <TransactionForm
           containers={containers}
           locations={locations}
-          currentUser={currentUser}
+          currentUser={await getUser()}
         />
       </div>
     </div>

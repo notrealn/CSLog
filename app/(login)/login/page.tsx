@@ -1,6 +1,12 @@
+// app/login/page.tsx
+"use client";
+
+import { useActionState } from "react";
 import { signin } from "../../actions/auth";
 
 export default function Login() {
+  const [state, formAction, isPending] = useActionState(signin, undefined);
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-slate-50 px-4 py-12 sm:px-6 lg:px-8 font-sans">
       <div className="w-full max-w-md space-y-8 rounded-xl border border-slate-200 bg-white p-8 shadow-sm">
@@ -13,7 +19,14 @@ export default function Login() {
           </p>
         </div>
 
-        <form action={signin} className="space-y-6">
+        <form action={formAction} className="space-y-6">
+          {/* Error Banner */}
+          {state && (
+            <div className="rounded-md bg-red-50 p-3 text-xs font-medium text-red-700 border border-red-200">
+              {state}
+            </div>
+          )}
+
           <div>
             <label
               htmlFor="name"
@@ -50,9 +63,10 @@ export default function Login() {
 
           <button
             type="submit"
-            className="flex w-full justify-center rounded-md bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900 active:bg-slate-950 transition-colors"
+            disabled={isPending}
+            className="flex w-full justify-center rounded-md bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900 active:bg-slate-950 transition-colors disabled:bg-slate-400 disabled:cursor-not-allowed"
           >
-            Sign In
+            {isPending ? "Signing In..." : "Sign In"}
           </button>
         </form>
       </div>

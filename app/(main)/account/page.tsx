@@ -15,7 +15,10 @@ export default async function AccountPage() {
           settings.
         </p>
       </div>
-      <button className="p-2 bg-slate-400 rounded-lg mb-2" onClick={logout}>
+      <button
+        className="mb-2 rounded-md bg-slate-900 px-6 py-2.5 text-sm font-semibold text-white shadow hover:bg-slate-800 transition-colors"
+        onClick={logout}
+      >
         Logout
       </button>
       <AccountForm user={user} />

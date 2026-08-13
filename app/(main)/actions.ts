@@ -34,9 +34,9 @@ export async function verifyAndCloseTransaction(formData: FormData) {
     if (!transaction) throw new Error("Transaction record not found.");
 
     // Disallow self-verification if your compliance rules require a separate witness
-    // if (transaction.userId === verifierUser.id) {
-    //   throw new Error("You cannot verify your own transaction.");
-    // }
+    if (transaction.userId === verifierUser.id) {
+      throw new Error("You cannot verify your own transaction.");
+    }
 
     // Strict validation
     const totalReconciled = amountUsed.plus(amountLost).plus(amountRemaining);
