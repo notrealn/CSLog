@@ -153,7 +153,7 @@ export default function SubstanceForm() {
               )}
             </div>
 
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-2 gap-3">
               <div>
                 <label className="mb-1 block text-xs font-medium text-slate-700">
                   Type
@@ -168,7 +168,7 @@ export default function SubstanceForm() {
               </div>
               <div>
                 <label className="mb-1 block text-xs font-medium text-slate-700">
-                  Serial Number
+                  Serial Number (unique)
                 </label>
                 <input
                   type="text"
@@ -179,12 +179,23 @@ export default function SubstanceForm() {
               </div>
               <div>
                 <label className="mb-1 block text-xs font-medium text-slate-700">
+                  Label
+                </label>
+                <input
+                  type="text"
+                  name={`containers[${index}][label]`}
+                  placeholder="Optional Label"
+                  className="w-full rounded-md border border-slate-300 px-2.5 py-1.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                />
+              </div>
+              <div>
+                <label className="mb-1 block text-xs font-medium text-slate-700">
                   Storage Bin
                 </label>
                 <input
                   type="text"
                   name={`containers[${index}][bin]`}
-                  placeholder="Optional bin"
+                  placeholder="Optional Bin"
                   className="w-full rounded-md border border-slate-300 px-2.5 py-1.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                 />
               </div>

@@ -139,6 +139,7 @@ exports.Prisma.ContainerScalarFieldEnum = {
   id: 'id',
   substanceId: 'substanceId',
   bin: 'bin',
+  label: 'label',
   serialNumber: 'serialNumber',
   initialGross: 'initialGross',
   initialTare: 'initialTare',
@@ -161,7 +162,8 @@ exports.Prisma.TransactionScalarFieldEnum = {
   toId: 'toId',
   date: 'date',
   userId: 'userId',
-  verifierId: 'verifierId'
+  verifierId: 'verifierId',
+  adminVerified: 'adminVerified'
 };
 
 exports.Prisma.UserScalarFieldEnum = {

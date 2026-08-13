@@ -18,6 +18,7 @@ export default async function LogTransactionPage() {
     substanceName: c.substance.productName,
     lotNumber: c.substance.lotNumber,
     serialNumber: c.serialNumber,
+    label: c.label,
     unit: c.substance.unit,
   }));
 

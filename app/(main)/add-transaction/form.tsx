@@ -10,6 +10,7 @@ interface ContainerOption {
   substanceName: string;
   lotNumber: string;
   serialNumber?: string | null;
+  label?: string | null;
   unit: string;
 }
 
@@ -121,6 +122,7 @@ export default function TransactionForm({
           {containers.map((container) => (
             <option key={container.id} value={container.id}>
               {container.substanceName} (Lot: {container.lotNumber})
+              {container.label ? ` • ${container.label}` : ""}
               {container.serialNumber ? ` • ${container.serialNumber}` : ""}
             </option>
           ))}
