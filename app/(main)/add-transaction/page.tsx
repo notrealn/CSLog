@@ -6,7 +6,7 @@ import { getUser } from "@/app/actions/session";
 export default async function LogTransactionPage() {
   const rawContainers = await prisma.container.findMany({
     include: { substance: true },
-    orderBy: [{ substance: { productName: "asc" } }, { id: "asc" }],
+    orderBy: [{ substance: { lotNumber: "asc" } }, { id: "asc" }],
   });
 
   const rawLocations = await prisma.location.findMany({
