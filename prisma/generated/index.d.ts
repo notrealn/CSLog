@@ -8890,7 +8890,7 @@ export namespace Prisma {
   >;
 
   /**
-   * Reference to a field of type 'Decimal[]'
+   * Reference to a field of type 'Boolean'
    */
   export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<
     $PrismaModel,
@@ -10582,6 +10582,11 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean;
   };
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type ContainerScalarRelationFilter = {
     is?: ContainerWhereInput;
     isNot?: ContainerWhereInput;
@@ -10706,6 +10711,14 @@ export namespace Prisma {
     _min?: NestedBoolFilter<$PrismaModel>;
     _max?: NestedBoolFilter<$PrismaModel>;
   };
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
 
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder;
@@ -11197,6 +11210,10 @@ export namespace Prisma {
   export type BoolFieldUpdateOperationsInput = {
     set?: boolean;
   };
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
 
   export type ContainerUpdateOneRequiredWithoutTransactionsNestedInput = {
     create?: XOR<
@@ -11863,6 +11880,11 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean;
   };
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null;
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null;
@@ -11897,6 +11919,14 @@ export namespace Prisma {
     _min?: NestedBoolFilter<$PrismaModel>;
     _max?: NestedBoolFilter<$PrismaModel>;
   };
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
 
   export type TransactionCreateWithoutFromInput = {
     amountCheckedOut: Decimal | DecimalJsLike | number | string;
