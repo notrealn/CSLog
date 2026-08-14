@@ -1,7 +1,7 @@
 // app/add-transaction/form.tsx
 "use client";
 
-import { useState, useActionState, useTransition } from "react";
+import { useState, useActionState, useTransition, useRef } from "react";
 import { createCheckoutTransaction, FormState } from "./actions";
 import { getContainerCounts } from "@/app/(main)/inventory/actions";
 
@@ -49,6 +49,8 @@ export default function TransactionForm({
   const [selectedContainerId, setSelectedContainerId] = useState<string>("");
   const [selectedFromId, setSelectedFromId] = useState<string>("");
   const [amountInput, setAmountInput] = useState<string>("");
+  const [barcodeSearch, setBarcodeSearch] = useState<string>("");
+  const [scanStatus, setScanStatus] = useState<string | null>(null);
 
   const [locationBalances, setLocationBalances] = useState<LocationBalance[]>(
     [],
@@ -56,21 +58,21 @@ export default function TransactionForm({
   const [unit, setUnit] = useState<string>("");
   const [isFetchingCounts, startFetchingCounts] = useTransition();
 
-  // 1. Fetch current container counts when container selection changes
-  const handleContainerChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const idStr = e.target.value;
+  const amountInputRef = useRef<HTMLInputElement>(null);
+
+  // Helper to trigger container balance fetch
+  const selectContainerById = (idNum: number) => {
+    const idStr = String(idNum);
     setSelectedContainerId(idStr);
     setSelectedFromId("");
     setLocationBalances([]);
 
-    if (!idStr) return;
-
-    const matched = containers.find((c) => c.id === Number(idStr));
+    const matched = containers.find((c) => c.id === idNum);
     if (matched) setUnit(matched.unit);
 
     startFetchingCounts(async () => {
       try {
-        const counts = await getContainerCounts(Number(idStr));
+        const counts = await getContainerCounts(idNum);
         if (counts) {
           setLocationBalances(counts.locationBalances);
         }
@@ -78,6 +80,50 @@ export default function TransactionForm({
         console.error("Failed to fetch location counts:", err);
       }
     });
+  };
+
+  // 1. Manual Dropdown Selection
+  const handleContainerChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const idStr = e.target.value;
+    setBarcodeSearch("");
+    setScanStatus(null);
+    if (!idStr) {
+      setSelectedContainerId("");
+      return;
+    }
+    selectContainerById(Number(idStr));
+  };
+
+  // 2. Barcode Scan Handler (Triggered on Enter key from scanner or manual blur)
+  const handleBarcodeScan = (query: string) => {
+    const trimmed = query.trim();
+    if (!trimmed) return;
+
+    // Search by Serial Number, Label, or exact Container ID
+    const matched = containers.find(
+      (c) =>
+        c.serialNumber?.toLowerCase() === trimmed.toLowerCase() ||
+        c.label?.toLowerCase() === trimmed.toLowerCase() ||
+        String(c.id) === trimmed,
+    );
+
+    if (matched) {
+      selectContainerById(matched.id);
+      setScanStatus(
+        `✓ Matched: ${matched.substanceName} (Lot: ${matched.lotNumber})`,
+      );
+      // Auto-focus the quantity input for smooth scanning workflow
+      setTimeout(() => amountInputRef.current?.focus(), 100);
+    } else {
+      setScanStatus(`❌ No container found matching "${trimmed}"`);
+    }
+  };
+
+  const handleBarcodeKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault(); // Prevent accidental form submission
+      handleBarcodeScan(barcodeSearch);
+    }
   };
 
   // Find balance for selected "From" location
@@ -106,10 +152,46 @@ export default function TransactionForm({
         </span>
       </div>
 
-      {/* Container Selection */}
+      {/* --- BARCODE SCANNER INPUT --- */}
+      <div className="rounded-md border border-indigo-200 bg-indigo-50/50 p-3 space-y-2">
+        <label className="text-xs font-bold uppercase tracking-wider text-indigo-900 flex items-center justify-between">
+          <span>📷 Scan Barcode / Serial Number</span>
+          <span className="text-[10px] text-indigo-600 font-normal">
+            Ready for USB/BT Scanner
+          </span>
+        </label>
+        <div className="relative">
+          <input
+            type="text"
+            value={barcodeSearch}
+            onChange={(e) => setBarcodeSearch(e.target.value)}
+            onKeyDown={handleBarcodeKeyDown}
+            placeholder="Scan barcode or type serial/label and press Enter..."
+            className="w-full rounded-md border border-indigo-300 bg-white px-3 py-2 text-sm focus:border-indigo-600 focus:outline-none focus:ring-1 focus:ring-indigo-600"
+          />
+          <button
+            type="button"
+            onClick={() => handleBarcodeScan(barcodeSearch)}
+            className="absolute right-1.5 top-1.5 rounded bg-indigo-600 px-2.5 py-1 text-xs font-semibold text-white hover:bg-indigo-700 transition-colors"
+          >
+            Find
+          </button>
+        </div>
+        {scanStatus && (
+          <p
+            className={`text-xs font-medium ${
+              scanStatus.startsWith("✓") ? "text-emerald-700" : "text-red-600"
+            }`}
+          >
+            {scanStatus}
+          </p>
+        )}
+      </div>
+
+      {/* Container Selection Dropdown */}
       <div>
         <label className="mb-1 block text-sm font-medium text-slate-700">
-          Select Container
+          Or Select Container Manually
         </label>
         <select
           name="containerId"
@@ -127,11 +209,6 @@ export default function TransactionForm({
             </option>
           ))}
         </select>
-        {/* {isFetchingCounts && (
-          <p className="mt-1 text-[11px] text-indigo-600 animate-pulse">
-            Fetching location balances...
-          </p>
-        )} */}
       </div>
 
       {/* From / To Locations */}
@@ -217,6 +294,7 @@ export default function TransactionForm({
           )}
         </div>
         <input
+          ref={amountInputRef}
           type="number"
           step="0.001"
           name="amountCheckedOut"
