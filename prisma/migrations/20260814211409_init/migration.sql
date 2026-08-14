@@ -24,6 +24,7 @@ CREATE TABLE "Container" (
     "id" SERIAL NOT NULL,
     "substanceId" INTEGER NOT NULL,
     "bin" TEXT,
+    "label" TEXT,
     "serialNumber" TEXT,
     "initialGross" DECIMAL(65,30),
     "initialTare" DECIMAL(65,30),
@@ -50,6 +51,7 @@ CREATE TABLE "Transaction" (
     "date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "userId" INTEGER NOT NULL,
     "verifierId" INTEGER,
+    "adminVerified" BOOLEAN NOT NULL DEFAULT false,
 
     CONSTRAINT "Transaction_pkey" PRIMARY KEY ("id")
 );
