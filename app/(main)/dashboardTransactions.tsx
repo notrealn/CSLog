@@ -1,8 +1,8 @@
-// app/dashboard/dashboardTransactions.tsx
+// app/dashboardTransactions.tsx
 "use client";
 
-import { useState } from "react";
-import { verifyAndCloseTransaction } from "./actions";
+import { useState, useActionState, useEffect } from "react";
+import { verifyAndCloseTransaction, FormState } from "./actions";
 import { Decimal } from "@prisma/client-runtime-utils";
 
 interface TransactionItem {
@@ -33,7 +33,7 @@ export function DashboardTransactions({
   const [activeTxId, setActiveTxId] = useState<number | null>(null);
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 font-sans">
       {initialTransactions.map((tx) => (
         <div
           key={tx.id}
@@ -58,7 +58,7 @@ export function DashboardTransactions({
             </div>
 
             <div className="text-right">
-              <span className="block text-base font-bold text-slate-900">
+              <span className="block text-base font-bold text-slate-900 font-mono">
                 {tx.amountCheckedOut} {tx.container.substance.unit}
               </span>
               <button
@@ -87,6 +87,8 @@ export function DashboardTransactions({
   );
 }
 
+const initialState: FormState = { error: undefined };
+
 function VerificationDrawer({
   transaction,
   verifierUser,
@@ -96,6 +98,11 @@ function VerificationDrawer({
   verifierUser: { id: number; name: string };
   onClose: () => void;
 }) {
+  const [state, formAction, isPending] = useActionState(
+    verifyAndCloseTransaction,
+    initialState,
+  );
+
   const [used, setUsed] = useState("");
   const [lost, setLost] = useState("");
   const [returned, setReturned] = useState("");
@@ -107,14 +114,26 @@ function VerificationDrawer({
   const remaining = checkedOut.minus(u.plus(l).plus(r));
   const isBalanced = remaining.isZero();
 
+  // Close the drawer if the action returned success
+  useEffect(() => {
+    if (state?.success) {
+      onClose();
+    }
+  }, [state?.success, onClose]);
+
   return (
     <form
-      action={verifyAndCloseTransaction}
-      onSubmit={onClose}
+      action={formAction}
       className="mt-4 pt-4 border-t border-slate-100 space-y-4"
     >
       <input type="hidden" name="transactionId" value={transaction.id} />
-      <input type="hidden" name="verifierId" value={verifierUser.id} />
+
+      {/* Error Message Display */}
+      {state?.error && (
+        <div className="rounded bg-red-50 p-3 text-xs font-semibold text-red-700 border border-red-200">
+          ⚠️ {state.error}
+        </div>
+      )}
 
       <div className="flex items-center justify-between text-xs bg-slate-50 p-2 rounded">
         <span>
@@ -122,7 +141,7 @@ function VerificationDrawer({
         </span>
         <span>
           Target Total:{" "}
-          <strong>
+          <strong className="font-mono">
             {checkedOut.toString()} {transaction.container.substance.unit}
           </strong>
         </span>
@@ -204,7 +223,9 @@ function VerificationDrawer({
 
       <div className="flex items-center justify-between pt-2">
         <span
-          className={`text-xs font-medium ${isBalanced ? "text-emerald-700" : "text-amber-700"}`}
+          className={`text-xs font-medium ${
+            isBalanced ? "text-emerald-700" : "text-amber-700"
+          }`}
         >
           {isBalanced
             ? "✓ Quantities balanced"
@@ -213,10 +234,10 @@ function VerificationDrawer({
 
         <button
           type="submit"
-          disabled={!isBalanced}
-          className="rounded bg-emerald-600 px-4 py-2 text-xs font-semibold text-white hover:bg-emerald-500 disabled:bg-slate-300 transition-colors"
+          disabled={!isBalanced || isPending}
+          className="rounded bg-emerald-600 px-4 py-2 text-xs font-semibold text-white hover:bg-emerald-500 disabled:bg-slate-300 disabled:cursor-not-allowed transition-colors"
         >
-          Complete Verification
+          {isPending ? "Completing..." : "Complete Verification"}
         </button>
       </div>
     </form>
