@@ -105,17 +105,7 @@ export async function getInventoryData(): Promise<InventorySummary> {
           (locationBreakdown[lb.location] ?? 0) + lb.amount;
       });
     });
-    console.log(
-      JSON.stringify({
-        exportedAt: new Date().toISOString(),
-        summary: {
-          totalSubstances: substances.length,
-          totalContainers: inventoryItems.length,
-          locationBreakdown,
-        },
-        inventory: inventoryItems,
-      }),
-    );
+
     return {
       exportedAt: new Date().toISOString(),
       summary: {
