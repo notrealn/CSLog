@@ -52,7 +52,7 @@ export async function createCheckoutTransaction(
   );
   const availableAtSource = sourceBalanceItem ? sourceBalanceItem.amount : 0;
 
-  if (amountCheckedOut.toNumber() > availableAtSource) {
+  if (amountCheckedOut.greaterThan(availableAtSource)) {
     return {
       error: `Overdraw error: Location "${fromId}" only has ${availableAtSource} ${containerCounts.substance.unit} available (requested ${amountCheckedOut.toString()}).`,
     };

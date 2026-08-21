@@ -2464,10 +2464,12 @@ export namespace Prisma {
 
   export type SubstanceAvgAggregateOutputType = {
     id: number | null
+    apiPerUnit: number | null
   }
 
   export type SubstanceSumAggregateOutputType = {
     id: number | null
+    apiPerUnit: number | null
   }
 
   export type SubstanceMinAggregateOutputType = {
@@ -2477,6 +2479,7 @@ export namespace Prisma {
     lotNumber: string | null
     materialType: string | null
     unit: string | null
+    apiPerUnit: number | null
     expirationDate: Date | null
     receivedDate: Date | null
   }
@@ -2488,6 +2491,7 @@ export namespace Prisma {
     lotNumber: string | null
     materialType: string | null
     unit: string | null
+    apiPerUnit: number | null
     expirationDate: Date | null
     receivedDate: Date | null
   }
@@ -2499,6 +2503,7 @@ export namespace Prisma {
     lotNumber: number
     materialType: number
     unit: number
+    apiPerUnit: number
     expirationDate: number
     receivedDate: number
     _all: number
@@ -2507,10 +2512,12 @@ export namespace Prisma {
 
   export type SubstanceAvgAggregateInputType = {
     id?: true
+    apiPerUnit?: true
   }
 
   export type SubstanceSumAggregateInputType = {
     id?: true
+    apiPerUnit?: true
   }
 
   export type SubstanceMinAggregateInputType = {
@@ -2520,6 +2527,7 @@ export namespace Prisma {
     lotNumber?: true
     materialType?: true
     unit?: true
+    apiPerUnit?: true
     expirationDate?: true
     receivedDate?: true
   }
@@ -2531,6 +2539,7 @@ export namespace Prisma {
     lotNumber?: true
     materialType?: true
     unit?: true
+    apiPerUnit?: true
     expirationDate?: true
     receivedDate?: true
   }
@@ -2542,6 +2551,7 @@ export namespace Prisma {
     lotNumber?: true
     materialType?: true
     unit?: true
+    apiPerUnit?: true
     expirationDate?: true
     receivedDate?: true
     _all?: true
@@ -2640,6 +2650,7 @@ export namespace Prisma {
     lotNumber: string
     materialType: string
     unit: string
+    apiPerUnit: number | null
     expirationDate: Date | null
     receivedDate: Date
     _count: SubstanceCountAggregateOutputType | null
@@ -2670,6 +2681,7 @@ export namespace Prisma {
     lotNumber?: boolean
     materialType?: boolean
     unit?: boolean
+    apiPerUnit?: boolean
     expirationDate?: boolean
     receivedDate?: boolean
     containers?: boolean | Substance$containersArgs<ExtArgs>
@@ -2683,6 +2695,7 @@ export namespace Prisma {
     lotNumber?: boolean
     materialType?: boolean
     unit?: boolean
+    apiPerUnit?: boolean
     expirationDate?: boolean
     receivedDate?: boolean
   }, ExtArgs["result"]["substance"]>
@@ -2694,6 +2707,7 @@ export namespace Prisma {
     lotNumber?: boolean
     materialType?: boolean
     unit?: boolean
+    apiPerUnit?: boolean
     expirationDate?: boolean
     receivedDate?: boolean
   }, ExtArgs["result"]["substance"]>
@@ -2705,11 +2719,12 @@ export namespace Prisma {
     lotNumber?: boolean
     materialType?: boolean
     unit?: boolean
+    apiPerUnit?: boolean
     expirationDate?: boolean
     receivedDate?: boolean
   }
 
-  export type SubstanceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "dateAdded" | "productName" | "lotNumber" | "materialType" | "unit" | "expirationDate" | "receivedDate", ExtArgs["result"]["substance"]>
+  export type SubstanceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "dateAdded" | "productName" | "lotNumber" | "materialType" | "unit" | "apiPerUnit" | "expirationDate" | "receivedDate", ExtArgs["result"]["substance"]>
   export type SubstanceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     containers?: boolean | Substance$containersArgs<ExtArgs>
     _count?: boolean | SubstanceCountOutputTypeDefaultArgs<ExtArgs>
@@ -2729,6 +2744,7 @@ export namespace Prisma {
       lotNumber: string
       materialType: string
       unit: string
+      apiPerUnit: number | null
       expirationDate: Date | null
       receivedDate: Date
     }, ExtArgs["result"]["substance"]>
@@ -3161,6 +3177,7 @@ export namespace Prisma {
     readonly lotNumber: FieldRef<"Substance", 'String'>
     readonly materialType: FieldRef<"Substance", 'String'>
     readonly unit: FieldRef<"Substance", 'String'>
+    readonly apiPerUnit: FieldRef<"Substance", 'Float'>
     readonly expirationDate: FieldRef<"Substance", 'DateTime'>
     readonly receivedDate: FieldRef<"Substance", 'DateTime'>
   }
@@ -7281,6 +7298,7 @@ export namespace Prisma {
     lotNumber: 'lotNumber',
     materialType: 'materialType',
     unit: 'unit',
+    apiPerUnit: 'apiPerUnit',
     expirationDate: 'expirationDate',
     receivedDate: 'receivedDate'
   };
@@ -7408,6 +7426,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Decimal'
    */
   export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
@@ -7425,20 +7457,6 @@ export namespace Prisma {
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
-    
-
-
-  /**
-   * Reference to a field of type 'Float'
-   */
-  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
-    
-
-
-  /**
-   * Reference to a field of type 'Float[]'
-   */
-  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
   /**
    * Deep Input Types
@@ -7493,6 +7511,7 @@ export namespace Prisma {
     lotNumber?: StringFilter<"Substance"> | string
     materialType?: StringFilter<"Substance"> | string
     unit?: StringFilter<"Substance"> | string
+    apiPerUnit?: FloatNullableFilter<"Substance"> | number | null
     expirationDate?: DateTimeNullableFilter<"Substance"> | Date | string | null
     receivedDate?: DateTimeFilter<"Substance"> | Date | string
     containers?: ContainerListRelationFilter
@@ -7505,6 +7524,7 @@ export namespace Prisma {
     lotNumber?: SortOrder
     materialType?: SortOrder
     unit?: SortOrder
+    apiPerUnit?: SortOrderInput | SortOrder
     expirationDate?: SortOrderInput | SortOrder
     receivedDate?: SortOrder
     containers?: ContainerOrderByRelationAggregateInput
@@ -7520,6 +7540,7 @@ export namespace Prisma {
     lotNumber?: StringFilter<"Substance"> | string
     materialType?: StringFilter<"Substance"> | string
     unit?: StringFilter<"Substance"> | string
+    apiPerUnit?: FloatNullableFilter<"Substance"> | number | null
     expirationDate?: DateTimeNullableFilter<"Substance"> | Date | string | null
     receivedDate?: DateTimeFilter<"Substance"> | Date | string
     containers?: ContainerListRelationFilter
@@ -7532,6 +7553,7 @@ export namespace Prisma {
     lotNumber?: SortOrder
     materialType?: SortOrder
     unit?: SortOrder
+    apiPerUnit?: SortOrderInput | SortOrder
     expirationDate?: SortOrderInput | SortOrder
     receivedDate?: SortOrder
     _count?: SubstanceCountOrderByAggregateInput
@@ -7551,6 +7573,7 @@ export namespace Prisma {
     lotNumber?: StringWithAggregatesFilter<"Substance"> | string
     materialType?: StringWithAggregatesFilter<"Substance"> | string
     unit?: StringWithAggregatesFilter<"Substance"> | string
+    apiPerUnit?: FloatNullableWithAggregatesFilter<"Substance"> | number | null
     expirationDate?: DateTimeNullableWithAggregatesFilter<"Substance"> | Date | string | null
     receivedDate?: DateTimeWithAggregatesFilter<"Substance"> | Date | string
   }
@@ -7861,6 +7884,7 @@ export namespace Prisma {
     lotNumber: string
     materialType: string
     unit: string
+    apiPerUnit?: number | null
     expirationDate?: Date | string | null
     receivedDate: Date | string
     containers?: ContainerCreateNestedManyWithoutSubstanceInput
@@ -7873,6 +7897,7 @@ export namespace Prisma {
     lotNumber: string
     materialType: string
     unit: string
+    apiPerUnit?: number | null
     expirationDate?: Date | string | null
     receivedDate: Date | string
     containers?: ContainerUncheckedCreateNestedManyWithoutSubstanceInput
@@ -7884,6 +7909,7 @@ export namespace Prisma {
     lotNumber?: StringFieldUpdateOperationsInput | string
     materialType?: StringFieldUpdateOperationsInput | string
     unit?: StringFieldUpdateOperationsInput | string
+    apiPerUnit?: NullableFloatFieldUpdateOperationsInput | number | null
     expirationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     receivedDate?: DateTimeFieldUpdateOperationsInput | Date | string
     containers?: ContainerUpdateManyWithoutSubstanceNestedInput
@@ -7896,6 +7922,7 @@ export namespace Prisma {
     lotNumber?: StringFieldUpdateOperationsInput | string
     materialType?: StringFieldUpdateOperationsInput | string
     unit?: StringFieldUpdateOperationsInput | string
+    apiPerUnit?: NullableFloatFieldUpdateOperationsInput | number | null
     expirationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     receivedDate?: DateTimeFieldUpdateOperationsInput | Date | string
     containers?: ContainerUncheckedUpdateManyWithoutSubstanceNestedInput
@@ -7908,6 +7935,7 @@ export namespace Prisma {
     lotNumber: string
     materialType: string
     unit: string
+    apiPerUnit?: number | null
     expirationDate?: Date | string | null
     receivedDate: Date | string
   }
@@ -7918,6 +7946,7 @@ export namespace Prisma {
     lotNumber?: StringFieldUpdateOperationsInput | string
     materialType?: StringFieldUpdateOperationsInput | string
     unit?: StringFieldUpdateOperationsInput | string
+    apiPerUnit?: NullableFloatFieldUpdateOperationsInput | number | null
     expirationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     receivedDate?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7929,6 +7958,7 @@ export namespace Prisma {
     lotNumber?: StringFieldUpdateOperationsInput | string
     materialType?: StringFieldUpdateOperationsInput | string
     unit?: StringFieldUpdateOperationsInput | string
+    apiPerUnit?: NullableFloatFieldUpdateOperationsInput | number | null
     expirationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     receivedDate?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -8280,6 +8310,17 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type FloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
   export type DateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -8313,12 +8354,14 @@ export namespace Prisma {
     lotNumber?: SortOrder
     materialType?: SortOrder
     unit?: SortOrder
+    apiPerUnit?: SortOrder
     expirationDate?: SortOrder
     receivedDate?: SortOrder
   }
 
   export type SubstanceAvgOrderByAggregateInput = {
     id?: SortOrder
+    apiPerUnit?: SortOrder
   }
 
   export type SubstanceMaxOrderByAggregateInput = {
@@ -8328,6 +8371,7 @@ export namespace Prisma {
     lotNumber?: SortOrder
     materialType?: SortOrder
     unit?: SortOrder
+    apiPerUnit?: SortOrder
     expirationDate?: SortOrder
     receivedDate?: SortOrder
   }
@@ -8339,12 +8383,14 @@ export namespace Prisma {
     lotNumber?: SortOrder
     materialType?: SortOrder
     unit?: SortOrder
+    apiPerUnit?: SortOrder
     expirationDate?: SortOrder
     receivedDate?: SortOrder
   }
 
   export type SubstanceSumOrderByAggregateInput = {
     id?: SortOrder
+    apiPerUnit?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -8375,6 +8421,22 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -8814,6 +8876,14 @@ export namespace Prisma {
     set?: Date | string
   }
 
+  export type NullableFloatFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type NullableDateTimeFieldUpdateOperationsInput = {
     set?: Date | string | null
   }
@@ -9151,6 +9221,17 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -9203,6 +9284,33 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -9215,17 +9323,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedStringNullableFilter<$PrismaModel = never> = {
@@ -9332,17 +9429,6 @@ export namespace Prisma {
     _sum?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedIntNullableFilter<$PrismaModel>
     _max?: NestedIntNullableFilter<$PrismaModel>
-  }
-
-  export type NestedFloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -9567,6 +9653,7 @@ export namespace Prisma {
     lotNumber: string
     materialType: string
     unit: string
+    apiPerUnit?: number | null
     expirationDate?: Date | string | null
     receivedDate: Date | string
   }
@@ -9578,6 +9665,7 @@ export namespace Prisma {
     lotNumber: string
     materialType: string
     unit: string
+    apiPerUnit?: number | null
     expirationDate?: Date | string | null
     receivedDate: Date | string
   }
@@ -9649,6 +9737,7 @@ export namespace Prisma {
     lotNumber?: StringFieldUpdateOperationsInput | string
     materialType?: StringFieldUpdateOperationsInput | string
     unit?: StringFieldUpdateOperationsInput | string
+    apiPerUnit?: NullableFloatFieldUpdateOperationsInput | number | null
     expirationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     receivedDate?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9660,6 +9749,7 @@ export namespace Prisma {
     lotNumber?: StringFieldUpdateOperationsInput | string
     materialType?: StringFieldUpdateOperationsInput | string
     unit?: StringFieldUpdateOperationsInput | string
+    apiPerUnit?: NullableFloatFieldUpdateOperationsInput | number | null
     expirationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     receivedDate?: DateTimeFieldUpdateOperationsInput | Date | string
   }

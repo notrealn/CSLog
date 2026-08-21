@@ -1,83 +1,84 @@
-// generator client {
-//   provider = "prisma-client-js"
-//   output   = "./generated"
-// }
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated"
+}
 
-// datasource db {
-//   provider = "postgres"
-// }
+datasource db {
+  provider = "postgres"
+}
 
-// model Location {
-//   name String @id
+model Location {
+  name String @id
 
-//   fromTransactions Transaction[] @relation("fromLocation")
-//   toTransactions   Transaction[] @relation("toLocation")
-// }
+  fromTransactions Transaction[] @relation("fromLocation")
+  toTransactions   Transaction[] @relation("toLocation")
+}
 
-// model Substance {
-//   id             Int         @id @default(autoincrement())
-//   dateAdded      DateTime    @default(now())
-//   productName    String
-//   lotNumber      String
-//   materialType   String
-//   unit           String
-//   expirationDate DateTime?
-//   receivedDate   DateTime
-//   containers     Container[]
-// }
+model Substance {
+  id             Int         @id @default(autoincrement())
+  dateAdded      DateTime    @default(now())
+  productName    String
+  lotNumber      String
+  materialType   String
+  unit           String
+  apiPerUnit     Float?
+  expirationDate DateTime?
+  receivedDate   DateTime
+  containers     Container[]
+}
 
-// model Container {
-//   id          Int       @id @default(autoincrement())
-//   substance   Substance @relation(fields: [substanceId], references: [id])
-//   substanceId Int
+model Container {
+  id          Int       @id @default(autoincrement())
+  substance   Substance @relation(fields: [substanceId], references: [id])
+  substanceId Int
 
-//   bin          String?
-//   label        String?
-//   serialNumber String? @unique
+  bin          String?
+  label        String?
+  serialNumber String? @unique
 
-//   // opened       Boolean       @default(false)
-//   initialGross Decimal?
-//   initialTare  Decimal?
-//   initialNet   Decimal
-//   container    String?
-//   transactions Transaction[]
-// }
+  // opened       Boolean       @default(false)
+  initialGross Decimal?
+  initialTare  Decimal?
+  initialNet   Decimal
+  container    String?
+  transactions Transaction[]
+}
 
-// model Transaction {
-//   id          Int       @id @default(autoincrement())
-//   container   Container @relation(fields: [containerId], references: [id])
-//   containerId Int
+model Transaction {
+  id          Int       @id @default(autoincrement())
+  container   Container @relation(fields: [containerId], references: [id])
+  containerId Int
 
-//   amountCheckedOut Decimal
-//   amountUsed       Decimal?
-//   amountLost       Decimal?
-//   amountRemaining  Decimal?
-//   newGross         Decimal?
-//   purpose          String
-//   description      String
-//   comment          String?
+  amountCheckedOut Decimal
+  amountUsed       Decimal?
+  amountLost       Decimal?
+  amountRemaining  Decimal?
+  newGross         Decimal?
+  purpose          String
+  description      String
+  comment          String?
 
-//   from   Location @relation("fromLocation", fields: [fromId], references: [name])
-//   fromId String
-//   to     Location @relation("toLocation", fields: [toId], references: [name])
-//   toId   String
+  from   Location @relation("fromLocation", fields: [fromId], references: [name])
+  fromId String
+  to     Location @relation("toLocation", fields: [toId], references: [name])
+  toId   String
 
-//   date       DateTime @default(now())
-//   user       User     @relation("user", fields: [userId], references: [id])
-//   userId     Int
-//   verifier   User?    @relation("verifier", fields: [verifierId], references: [id])
-//   verifierId Int?
+  date       DateTime @default(now())
+  user       User     @relation("user", fields: [userId], references: [id])
+  userId     Int
+  verifier   User?    @relation("verifier", fields: [verifierId], references: [id])
+  verifierId Int?
 
-//   adminVerified Boolean @default(false)
-// }
+  adminVerified Boolean @default(false)
+}
 
-// model User {
-//   id             Int    @id @default(autoincrement())
-//   name           String @unique
-//   initials       String
-//   hashedPassword String
-//   role           String @default("REVIEWER")
+model User {
+  id             Int    @id @default(autoincrement())
+  name           String @unique
+  initials       String
+  hashedPassword String
+  role           String @default("REVIEWER")
 
-//   used     Transaction[] @relation("user")
-//   verified Transaction[] @relation("verifier")
-// }
+  used     Transaction[] @relation("user")
+  verified Transaction[] @relation("verifier")
+}

@@ -149,12 +149,13 @@ export default function InventoryPage() {
           <table className="w-full text-left text-sm text-gray-600">
             <thead className="bg-gray-50 text-gray-700 uppercase text-xs tracking-wider border-b border-gray-200">
               <tr>
-                <th className="px-6 py-3">Product / Material</th>
-                <th className="px-6 py-3">Lot & Serial #</th>
+                <th className="px-6 py-3">Product</th>
+                <th className="px-6 py-3">Lot & Labels</th>
+                <th className="px-6 py-3">Bin</th>
                 <th className="px-6 py-3">Location Breakdown</th>
                 <th className="px-6 py-3 text-right">Total Remaining</th>
                 <th className="px-6 py-3 text-right">Initial Net</th>
-                <th className="px-6 py-3">Status</th>
+                {/* <th className="px-6 py-3">Status</th> */}
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
@@ -169,17 +170,23 @@ export default function InventoryPage() {
                       {item.substance.productName}
                     </div>
                     <div className="text-xs text-gray-400">
-                      {item.substance.materialType}
+                      {item.substance.materialType} •{" "}
+                      {item.substance.apiPerUnit || "???"} API/
+                      {item.substance.unit}
                     </div>
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 max-w-3 text-wrap wrap-break-word">
                     <div className="font-mono text-xs text-gray-800">
                       Lot: {item.substance.lotNumber}
                     </div>
                     <div className="font-mono text-xs text-gray-500">
-                      SN: {item.serialNumber}
+                      SN: {item.serialNumber || "N/A"}
+                    </div>
+                    <div className="font-mono text-xs text-gray-500">
+                      Label: {item.label || "N/A"}
                     </div>
                   </td>
+                  <td className="px-6 py-4">{item.bin || "N/A"}</td>
                   <td className="px-6 py-4">
                     {item.locationBalances.length === 0 ? (
                       <span className="text-xs text-gray-400">
@@ -205,7 +212,7 @@ export default function InventoryPage() {
                   <td className="px-6 py-4 text-right font-mono text-xs text-gray-500">
                     {item.initialNet} {item.substance.unit}
                   </td>
-                  <td className="px-6 py-4">
+                  {/* <td className="px-6 py-4">
                     {item.totalRemaining <= 0 ? (
                       <span className="px-2 py-1 text-xs font-semibold text-red-700 bg-red-50 rounded-md">
                         Depleted
@@ -220,7 +227,7 @@ export default function InventoryPage() {
                         Available
                       </span>
                     )}
-                  </td>
+                  </td> */}
                 </tr>
               ))}
             </tbody>

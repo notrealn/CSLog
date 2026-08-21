@@ -42,19 +42,18 @@ export default function SubstanceForm() {
           Substance Details
         </h3>
 
-        <div>
-          <label className="mb-1 block text-sm font-medium text-slate-700">
-            Product Name
-          </label>
-          <input
-            type="text"
-            name="productName"
-            required
-            className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-          />
-        </div>
-
         <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="mb-1 block text-sm font-medium text-slate-700">
+              Product Name
+            </label>
+            <input
+              type="text"
+              name="productName"
+              required
+              className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            />
+          </div>{" "}
           <div>
             <label className="mb-1 block text-sm font-medium text-slate-700">
               Lot Number
@@ -66,6 +65,9 @@ export default function SubstanceForm() {
               className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
           </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="mb-1 block text-sm font-medium text-slate-700">
               Unit
@@ -75,6 +77,19 @@ export default function SubstanceForm() {
               name="unit"
               placeholder="e.g., g, ml, syringes"
               required
+              className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            />
+          </div>
+          <div>
+            <label className="mb-1 block text-sm font-medium text-slate-700">
+              API (g) per Unit
+            </label>
+            <input
+              type="number"
+              name="apiPerUnit"
+              step="any"
+              required
+              placeholder="API in grams per unit"
               className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
           </div>
@@ -208,7 +223,7 @@ export default function SubstanceForm() {
                 </label>
                 <input
                   type="number"
-                  step="0.001"
+                  step="any"
                   name={`containers[${index}][initialNet]`}
                   placeholder="Printed label weight or item count"
                   className="w-full rounded-md border border-slate-300 bg-white px-2.5 py-1.5 text-sm font-medium text-blue-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
@@ -235,7 +250,7 @@ export default function SubstanceForm() {
                     </label>
                     <input
                       type="number"
-                      step="0.001"
+                      step="any"
                       name={`containers[${index}][initialGross]`}
                       placeholder="Total scale weight"
                       className="w-full rounded-md border border-slate-300 bg-white px-2.5 py-1.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
@@ -247,9 +262,9 @@ export default function SubstanceForm() {
                     </label>
                     <input
                       type="number"
-                      step="0.001"
+                      step="any"
                       name={`containers[${index}][initialTare]`}
-                      placeholder="Empty container"
+                      placeholder="Empty container weight"
                       className="w-full rounded-md border border-slate-300 bg-white px-2.5 py-1.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                     />
                   </div>

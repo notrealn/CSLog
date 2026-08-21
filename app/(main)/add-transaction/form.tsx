@@ -156,9 +156,11 @@ export default function TransactionForm({
       <div className="rounded-md border border-indigo-200 bg-indigo-50/50 p-3 space-y-2">
         <label className="text-xs font-bold uppercase tracking-wider text-indigo-900 flex items-center justify-between">
           <span>📷 Scan Barcode / Serial Number</span>
+          {/*
           <span className="text-[10px] text-indigo-600 font-normal">
             Ready for USB/BT Scanner
           </span>
+          */}
         </label>
         <div className="relative">
           <input
