@@ -21,6 +21,7 @@ model Substance {
     lotNumber      String
     materialType   String
     unit           String
+    apiPerUnit     Float?
     expirationDate DateTime?
     receivedDate   DateTime
     containers     Container[]

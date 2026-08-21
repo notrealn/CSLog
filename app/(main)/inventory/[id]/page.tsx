@@ -48,31 +48,41 @@ export default async function ContainerDetailPage({ params }: Props) {
               </div>
               <p className="text-xs text-gray-500 mt-1">
                 Container ID #{container.id} • Lot:{" "}
-                {container.substance.lotNumber} • SN: {container.serialNumber}
+                {container.substance.lotNumber} • SN:{" "}
+                {container.serialNumber || "N/A"} • Label:{" "}
+                {container.label || "N/A"}
               </p>
             </div>
 
-            <div className="flex items-center gap-5">
-              {/* <div className="text-right">
-              <span className="text-xs font-semibold text-gray-400 uppercase">
-                Initial Net
-              </span>
-              <p className="text-lg font-bold font-mono text-gray-900">
-                {container.initialNet} {container.substance.unit}
-              </p>
-            </div> */}
-              <div className="text-right">
-                <span className="text-xs font-semibold text-gray-400 uppercase">
-                  Initial Net
-                </span>
-                <p className="text-lg font-bold font-mono text-gray-900">
-                  {container.initialNet} {container.substance.unit}
-                </p>
+            <div className="flex items-center gap-5 flex-wrap">
+              <LabeledVal
+                label="Initial Net"
+                val={container.initialNet}
+                unit={container.substance.unit}
+              />
+
+              <LabeledVal
+                label="Total Remaining"
+                val={container.totalRemaining}
+                unit={container.substance.unit}
+              />
+              <div className="border-l border-gray-200 flex pl-4 gap-4">
+                {container.locationBalances
+                  .filter((loc) => loc.location != "Out")
+                  .map((loc) => (
+                    <div key={loc.location}>
+                      <LabeledVal
+                        label={loc.location}
+                        val={loc.amount}
+                        unit={container.substance.unit}
+                      />
+                    </div>
+                  ))}
               </div>
             </div>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-xs">
             <div>
               <span className="text-gray-400 block font-medium">
                 Container Type
@@ -86,7 +96,17 @@ export default async function ContainerDetailPage({ params }: Props) {
                 Storage Bin
               </span>
               <span className="font-semibold text-gray-800">
-                {container.bin}
+                {container.bin || "N/A"}
+              </span>
+            </div>
+            <div>
+              <span className="text-gray-400 block font-medium">
+                API Per Unit
+              </span>
+              <span className="font-semibold text-gray-800 font-mono">
+                {container.substance.apiPerUnit != null
+                  ? `${container.substance.apiPerUnit} g`
+                  : "N/A"}
               </span>
             </div>
             <div>
@@ -208,6 +228,27 @@ export default async function ContainerDetailPage({ params }: Props) {
           )}
         </div>
       </div>
+    </div>
+  );
+}
+
+function LabeledVal({
+  label,
+  val,
+  unit,
+}: {
+  label: string;
+  val: string | number;
+  unit: string;
+}) {
+  return (
+    <div className="text-right">
+      <span className="text-xs font-semibold text-gray-400 uppercase">
+        {label}
+      </span>
+      <p className="text-lg font-bold font-mono text-gray-900">
+        {val} {unit}
+      </p>
     </div>
   );
 }

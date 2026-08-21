@@ -5,7 +5,6 @@ import {
   Location,
   Substance,
   Transaction,
-  User,
 } from "@/prisma/generated";
 import { prisma } from "@/prisma/prisma";
 
@@ -59,7 +58,6 @@ export interface InventorySummary {
   summary: {
     totalSubstances: number;
     totalContainers: number;
-    locationBreakdown: Record<string, number>;
   };
   inventory: ContainerInventoryItem[];
 }
@@ -97,21 +95,18 @@ export async function getInventoryData(): Promise<InventorySummary> {
       },
     );
 
-    // Summary of total units across all locations in storage
-    const locationBreakdown: Record<string, number> = {};
-    inventoryItems.forEach((item) => {
-      item.locationBalances.forEach((lb) => {
-        locationBreakdown[lb.location] =
-          (locationBreakdown[lb.location] ?? 0) + lb.amount;
-      });
-    });
+    inventoryItems.forEach(
+      (item) =>
+        (item.locationBalances = item.locationBalances.filter(
+          (loc) => loc.location != "Out",
+        )),
+    );
 
     return {
       exportedAt: new Date().toISOString(),
       summary: {
         totalSubstances: substances.length,
         totalContainers: inventoryItems.length,
-        locationBreakdown,
       },
       inventory: inventoryItems,
     };
@@ -137,6 +132,7 @@ function combineTransactions(
   // Track running balances across locations, defaulting initialNet to "Cage"
   const balancesByLocation: Record<string, number> = {
     Cage: initialNet,
+    Out: Infinity,
   };
 
   container.transactions.forEach((tx) => {
@@ -166,7 +162,9 @@ function combineTransactions(
     .filter(([_, amount]) => amount > 0)
     .map(([location, amount]) => ({ location, amount }));
 
-  const totalRemaining = locationBalances.reduce((sum, b) => sum + b.amount, 0);
+  const totalRemaining = locationBalances
+    .filter((loc) => loc.location != "Out")
+    .reduce((sum, b) => sum + b.amount, 0);
 
   Object.assign(container, {
     initialNet: initialNet.toString(),
