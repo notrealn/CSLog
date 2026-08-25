@@ -2478,6 +2478,8 @@ export namespace Prisma {
     materialType: string | null
     unit: string | null
     apiPerUnit: number | null
+    supplier: string | null
+    manufacturer: string | null
     expirationDate: Date | null
     receivedDate: Date | null
   }
@@ -2490,6 +2492,8 @@ export namespace Prisma {
     materialType: string | null
     unit: string | null
     apiPerUnit: number | null
+    supplier: string | null
+    manufacturer: string | null
     expirationDate: Date | null
     receivedDate: Date | null
   }
@@ -2502,6 +2506,8 @@ export namespace Prisma {
     materialType: number
     unit: number
     apiPerUnit: number
+    supplier: number
+    manufacturer: number
     expirationDate: number
     receivedDate: number
     _all: number
@@ -2526,6 +2532,8 @@ export namespace Prisma {
     materialType?: true
     unit?: true
     apiPerUnit?: true
+    supplier?: true
+    manufacturer?: true
     expirationDate?: true
     receivedDate?: true
   }
@@ -2538,6 +2546,8 @@ export namespace Prisma {
     materialType?: true
     unit?: true
     apiPerUnit?: true
+    supplier?: true
+    manufacturer?: true
     expirationDate?: true
     receivedDate?: true
   }
@@ -2550,6 +2560,8 @@ export namespace Prisma {
     materialType?: true
     unit?: true
     apiPerUnit?: true
+    supplier?: true
+    manufacturer?: true
     expirationDate?: true
     receivedDate?: true
     _all?: true
@@ -2649,6 +2661,8 @@ export namespace Prisma {
     materialType: string
     unit: string
     apiPerUnit: number | null
+    supplier: string | null
+    manufacturer: string | null
     expirationDate: Date | null
     receivedDate: Date
     _count: SubstanceCountAggregateOutputType | null
@@ -2680,6 +2694,8 @@ export namespace Prisma {
     materialType?: boolean
     unit?: boolean
     apiPerUnit?: boolean
+    supplier?: boolean
+    manufacturer?: boolean
     expirationDate?: boolean
     receivedDate?: boolean
     containers?: boolean | Substance$containersArgs<ExtArgs>
@@ -2694,6 +2710,8 @@ export namespace Prisma {
     materialType?: boolean
     unit?: boolean
     apiPerUnit?: boolean
+    supplier?: boolean
+    manufacturer?: boolean
     expirationDate?: boolean
     receivedDate?: boolean
   }, ExtArgs["result"]["substance"]>
@@ -2706,6 +2724,8 @@ export namespace Prisma {
     materialType?: boolean
     unit?: boolean
     apiPerUnit?: boolean
+    supplier?: boolean
+    manufacturer?: boolean
     expirationDate?: boolean
     receivedDate?: boolean
   }, ExtArgs["result"]["substance"]>
@@ -2718,11 +2738,13 @@ export namespace Prisma {
     materialType?: boolean
     unit?: boolean
     apiPerUnit?: boolean
+    supplier?: boolean
+    manufacturer?: boolean
     expirationDate?: boolean
     receivedDate?: boolean
   }
 
-  export type SubstanceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "dateAdded" | "productName" | "lotNumber" | "materialType" | "unit" | "apiPerUnit" | "expirationDate" | "receivedDate", ExtArgs["result"]["substance"]>
+  export type SubstanceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "dateAdded" | "productName" | "lotNumber" | "materialType" | "unit" | "apiPerUnit" | "supplier" | "manufacturer" | "expirationDate" | "receivedDate", ExtArgs["result"]["substance"]>
   export type SubstanceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     containers?: boolean | Substance$containersArgs<ExtArgs>
     _count?: boolean | SubstanceCountOutputTypeDefaultArgs<ExtArgs>
@@ -2743,6 +2765,8 @@ export namespace Prisma {
       materialType: string
       unit: string
       apiPerUnit: number | null
+      supplier: string | null
+      manufacturer: string | null
       expirationDate: Date | null
       receivedDate: Date
     }, ExtArgs["result"]["substance"]>
@@ -3176,6 +3200,8 @@ export namespace Prisma {
     readonly materialType: FieldRef<"Substance", 'String'>
     readonly unit: FieldRef<"Substance", 'String'>
     readonly apiPerUnit: FieldRef<"Substance", 'Float'>
+    readonly supplier: FieldRef<"Substance", 'String'>
+    readonly manufacturer: FieldRef<"Substance", 'String'>
     readonly expirationDate: FieldRef<"Substance", 'DateTime'>
     readonly receivedDate: FieldRef<"Substance", 'DateTime'>
   }
@@ -7286,6 +7312,8 @@ export namespace Prisma {
     materialType: 'materialType',
     unit: 'unit',
     apiPerUnit: 'apiPerUnit',
+    supplier: 'supplier',
+    manufacturer: 'manufacturer',
     expirationDate: 'expirationDate',
     receivedDate: 'receivedDate'
   };
@@ -7456,6 +7484,8 @@ export namespace Prisma {
     materialType?: StringFilter<"Substance"> | string
     unit?: StringFilter<"Substance"> | string
     apiPerUnit?: FloatNullableFilter<"Substance"> | number | null
+    supplier?: StringNullableFilter<"Substance"> | string | null
+    manufacturer?: StringNullableFilter<"Substance"> | string | null
     expirationDate?: DateTimeNullableFilter<"Substance"> | Date | string | null
     receivedDate?: DateTimeFilter<"Substance"> | Date | string
     containers?: ContainerListRelationFilter
@@ -7469,6 +7499,8 @@ export namespace Prisma {
     materialType?: SortOrder
     unit?: SortOrder
     apiPerUnit?: SortOrderInput | SortOrder
+    supplier?: SortOrderInput | SortOrder
+    manufacturer?: SortOrderInput | SortOrder
     expirationDate?: SortOrderInput | SortOrder
     receivedDate?: SortOrder
     containers?: ContainerOrderByRelationAggregateInput
@@ -7485,6 +7517,8 @@ export namespace Prisma {
     materialType?: StringFilter<"Substance"> | string
     unit?: StringFilter<"Substance"> | string
     apiPerUnit?: FloatNullableFilter<"Substance"> | number | null
+    supplier?: StringNullableFilter<"Substance"> | string | null
+    manufacturer?: StringNullableFilter<"Substance"> | string | null
     expirationDate?: DateTimeNullableFilter<"Substance"> | Date | string | null
     receivedDate?: DateTimeFilter<"Substance"> | Date | string
     containers?: ContainerListRelationFilter
@@ -7498,6 +7532,8 @@ export namespace Prisma {
     materialType?: SortOrder
     unit?: SortOrder
     apiPerUnit?: SortOrderInput | SortOrder
+    supplier?: SortOrderInput | SortOrder
+    manufacturer?: SortOrderInput | SortOrder
     expirationDate?: SortOrderInput | SortOrder
     receivedDate?: SortOrder
     _count?: SubstanceCountOrderByAggregateInput
@@ -7518,6 +7554,8 @@ export namespace Prisma {
     materialType?: StringWithAggregatesFilter<"Substance"> | string
     unit?: StringWithAggregatesFilter<"Substance"> | string
     apiPerUnit?: FloatNullableWithAggregatesFilter<"Substance"> | number | null
+    supplier?: StringNullableWithAggregatesFilter<"Substance"> | string | null
+    manufacturer?: StringNullableWithAggregatesFilter<"Substance"> | string | null
     expirationDate?: DateTimeNullableWithAggregatesFilter<"Substance"> | Date | string | null
     receivedDate?: DateTimeWithAggregatesFilter<"Substance"> | Date | string
   }
@@ -7829,6 +7867,8 @@ export namespace Prisma {
     materialType: string
     unit: string
     apiPerUnit?: number | null
+    supplier?: string | null
+    manufacturer?: string | null
     expirationDate?: Date | string | null
     receivedDate: Date | string
     containers?: ContainerCreateNestedManyWithoutSubstanceInput
@@ -7842,6 +7882,8 @@ export namespace Prisma {
     materialType: string
     unit: string
     apiPerUnit?: number | null
+    supplier?: string | null
+    manufacturer?: string | null
     expirationDate?: Date | string | null
     receivedDate: Date | string
     containers?: ContainerUncheckedCreateNestedManyWithoutSubstanceInput
@@ -7854,6 +7896,8 @@ export namespace Prisma {
     materialType?: StringFieldUpdateOperationsInput | string
     unit?: StringFieldUpdateOperationsInput | string
     apiPerUnit?: NullableFloatFieldUpdateOperationsInput | number | null
+    supplier?: NullableStringFieldUpdateOperationsInput | string | null
+    manufacturer?: NullableStringFieldUpdateOperationsInput | string | null
     expirationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     receivedDate?: DateTimeFieldUpdateOperationsInput | Date | string
     containers?: ContainerUpdateManyWithoutSubstanceNestedInput
@@ -7867,6 +7911,8 @@ export namespace Prisma {
     materialType?: StringFieldUpdateOperationsInput | string
     unit?: StringFieldUpdateOperationsInput | string
     apiPerUnit?: NullableFloatFieldUpdateOperationsInput | number | null
+    supplier?: NullableStringFieldUpdateOperationsInput | string | null
+    manufacturer?: NullableStringFieldUpdateOperationsInput | string | null
     expirationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     receivedDate?: DateTimeFieldUpdateOperationsInput | Date | string
     containers?: ContainerUncheckedUpdateManyWithoutSubstanceNestedInput
@@ -7880,6 +7926,8 @@ export namespace Prisma {
     materialType: string
     unit: string
     apiPerUnit?: number | null
+    supplier?: string | null
+    manufacturer?: string | null
     expirationDate?: Date | string | null
     receivedDate: Date | string
   }
@@ -7891,6 +7939,8 @@ export namespace Prisma {
     materialType?: StringFieldUpdateOperationsInput | string
     unit?: StringFieldUpdateOperationsInput | string
     apiPerUnit?: NullableFloatFieldUpdateOperationsInput | number | null
+    supplier?: NullableStringFieldUpdateOperationsInput | string | null
+    manufacturer?: NullableStringFieldUpdateOperationsInput | string | null
     expirationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     receivedDate?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7903,6 +7953,8 @@ export namespace Prisma {
     materialType?: StringFieldUpdateOperationsInput | string
     unit?: StringFieldUpdateOperationsInput | string
     apiPerUnit?: NullableFloatFieldUpdateOperationsInput | number | null
+    supplier?: NullableStringFieldUpdateOperationsInput | string | null
+    manufacturer?: NullableStringFieldUpdateOperationsInput | string | null
     expirationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     receivedDate?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -8263,6 +8315,20 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type DateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | null
@@ -8297,6 +8363,8 @@ export namespace Prisma {
     materialType?: SortOrder
     unit?: SortOrder
     apiPerUnit?: SortOrder
+    supplier?: SortOrder
+    manufacturer?: SortOrder
     expirationDate?: SortOrder
     receivedDate?: SortOrder
   }
@@ -8314,6 +8382,8 @@ export namespace Prisma {
     materialType?: SortOrder
     unit?: SortOrder
     apiPerUnit?: SortOrder
+    supplier?: SortOrder
+    manufacturer?: SortOrder
     expirationDate?: SortOrder
     receivedDate?: SortOrder
   }
@@ -8326,6 +8396,8 @@ export namespace Prisma {
     materialType?: SortOrder
     unit?: SortOrder
     apiPerUnit?: SortOrder
+    supplier?: SortOrder
+    manufacturer?: SortOrder
     expirationDate?: SortOrder
     receivedDate?: SortOrder
   }
@@ -8381,6 +8453,23 @@ export namespace Prisma {
     _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | null
@@ -8393,20 +8482,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type DecimalNullableFilter<$PrismaModel = never> = {
@@ -8486,23 +8561,6 @@ export namespace Prisma {
     initialGross?: SortOrder
     initialTare?: SortOrder
     initialNet?: SortOrder
-  }
-
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type DecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -8824,6 +8882,10 @@ export namespace Prisma {
     divide?: number
   }
 
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
   export type NullableDateTimeFieldUpdateOperationsInput = {
     set?: Date | string | null
   }
@@ -8882,10 +8944,6 @@ export namespace Prisma {
     connectOrCreate?: TransactionCreateOrConnectWithoutContainerInput | TransactionCreateOrConnectWithoutContainerInput[]
     createMany?: TransactionCreateManyContainerInputEnvelope
     connect?: TransactionWhereUniqueInput | TransactionWhereUniqueInput[]
-  }
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
   }
 
   export type NullableDecimalFieldUpdateOperationsInput = {
@@ -9172,6 +9230,20 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | null
@@ -9251,6 +9323,23 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | null
@@ -9263,20 +9352,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type NestedDecimalNullableFilter<$PrismaModel = never> = {
@@ -9299,23 +9374,6 @@ export namespace Prisma {
     gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
-  }
-
-  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type NestedDecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -9591,6 +9649,8 @@ export namespace Prisma {
     materialType: string
     unit: string
     apiPerUnit?: number | null
+    supplier?: string | null
+    manufacturer?: string | null
     expirationDate?: Date | string | null
     receivedDate: Date | string
   }
@@ -9603,6 +9663,8 @@ export namespace Prisma {
     materialType: string
     unit: string
     apiPerUnit?: number | null
+    supplier?: string | null
+    manufacturer?: string | null
     expirationDate?: Date | string | null
     receivedDate: Date | string
   }
@@ -9674,6 +9736,8 @@ export namespace Prisma {
     materialType?: StringFieldUpdateOperationsInput | string
     unit?: StringFieldUpdateOperationsInput | string
     apiPerUnit?: NullableFloatFieldUpdateOperationsInput | number | null
+    supplier?: NullableStringFieldUpdateOperationsInput | string | null
+    manufacturer?: NullableStringFieldUpdateOperationsInput | string | null
     expirationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     receivedDate?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9686,6 +9750,8 @@ export namespace Prisma {
     materialType?: StringFieldUpdateOperationsInput | string
     unit?: StringFieldUpdateOperationsInput | string
     apiPerUnit?: NullableFloatFieldUpdateOperationsInput | number | null
+    supplier?: NullableStringFieldUpdateOperationsInput | string | null
+    manufacturer?: NullableStringFieldUpdateOperationsInput | string | null
     expirationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     receivedDate?: DateTimeFieldUpdateOperationsInput | Date | string
   }

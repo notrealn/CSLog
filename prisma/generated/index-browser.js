@@ -129,6 +129,8 @@ exports.Prisma.SubstanceScalarFieldEnum = {
   materialType: 'materialType',
   unit: 'unit',
   apiPerUnit: 'apiPerUnit',
+  supplier: 'supplier',
+  manufacturer: 'manufacturer',
   expirationDate: 'expirationDate',
   receivedDate: 'receivedDate'
 };

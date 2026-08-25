@@ -15,6 +15,8 @@ export async function createSubstance(
   const apiPerUnitRaw = formData.get("apiPerUnit");
   const apiPerUnit = apiPerUnitRaw ? parseFloat(apiPerUnitRaw as string) : null;
   const materialType = formData.get("materialType") as string;
+  const supplier = formData.get("supplier") as string;
+  const manufacturer = formData.get("manufacturer") as string;
   const receivedDateRaw = formData.get("receivedDate") as string;
   const expirationDateRaw = formData.get("expirationDate") as string;
 
@@ -46,6 +48,8 @@ export async function createSubstance(
           unit,
           apiPerUnit,
           materialType,
+          supplier,
+          manufacturer,
           receivedDate,
           expirationDate,
         },

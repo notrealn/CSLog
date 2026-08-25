@@ -3,7 +3,6 @@ import { NextResponse } from "next/server";
 import { format } from "fast-csv";
 
 export async function GET() {
-  console.log("asjdflkasdfjdsaf");
   try {
     const data = await getInventoryData();
     const filename = `inventory-export-${new Date().toISOString().slice(0, 10)}.csv`;
@@ -30,20 +29,27 @@ export async function GET() {
 
         // Write inventory records
         data.inventory.forEach((item) => {
-          const locationBreakdown = item.locationBalances
-            .map((lb) => `${lb.location}: ${lb.amount} ${item.substance.unit}`)
-            .join(" | ");
+          // const locationBreakdown = item.locationBalances
+          //   .map((lb) => `${lb.location}: ${lb.amount} ${item.substance.unit}`)
+          //   .join(" | ");
 
           csvStream.write({
             // "Container ID": item.containerId,
             "Product Name": item.substance.productName,
             "Lot Number": item.substance.lotNumber,
             "Material Type": item.substance.materialType,
-            "Serial Number": item.serialNumber || "N/A",
-            Bin: item.bin || "N/A",
+            "Serial Number": item.serialNumber,
+            Label: item.label,
+            Bin: item.bin,
             "Initial Net": `${item.initialNet} ${item.substance.unit}`,
             "Total Remaining": `${item.totalRemaining} ${item.substance.unit}`,
-            "Location Breakdown": locationBreakdown || "None (Fully Used/Lost)",
+            // "Location Breakdown": locationBreakdown || "None (Fully Used/Lost)",
+            ...Object.fromEntries(
+              item.locationBalances.map((loc) => [
+                loc.location,
+                `${loc.amount} ${item.substance.unit}`,
+              ]),
+            ),
             "Transaction Count": item.transactionCount,
           });
         });

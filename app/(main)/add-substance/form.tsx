@@ -42,18 +42,18 @@ export default function SubstanceForm() {
           Substance Details
         </h3>
 
+        <div>
+          <label className="mb-1 block text-sm font-medium text-slate-700">
+            Product Name
+          </label>
+          <input
+            type="text"
+            name="productName"
+            required
+            className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          />
+        </div>
         <div className="grid grid-cols-2 gap-4">
-          <div>
-            <label className="mb-1 block text-sm font-medium text-slate-700">
-              Product Name
-            </label>
-            <input
-              type="text"
-              name="productName"
-              required
-              className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-            />
-          </div>{" "}
           <div>
             <label className="mb-1 block text-sm font-medium text-slate-700">
               Lot Number
@@ -62,6 +62,18 @@ export default function SubstanceForm() {
               type="text"
               name="lotNumber"
               required
+              className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            />
+          </div>
+          <div>
+            <label className="mb-1 block text-sm font-medium text-slate-700">
+              Material Type
+            </label>
+            <input
+              type="text"
+              name="materialType"
+              required
+              placeholder="e.g., RL, DP"
               className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
           </div>
@@ -98,16 +110,27 @@ export default function SubstanceForm() {
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="mb-1 block text-sm font-medium text-slate-700">
-              Material Type
+              Supplier
             </label>
             <input
               type="text"
-              name="materialType"
-              required
-              placeholder="e.g., RL, DP"
+              name="supplier"
               className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
           </div>
+          <div>
+            <label className="mb-1 block text-sm font-medium text-slate-700">
+              Manufacturer
+            </label>
+            <input
+              type="text"
+              name="manufacturer"
+              className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="mb-1 block text-sm font-medium text-slate-700">
               Received Date
@@ -119,17 +142,16 @@ export default function SubstanceForm() {
               className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
           </div>
-        </div>
-
-        <div>
-          <label className="mb-1 block text-sm font-medium text-slate-700">
-            Expiration Date
-          </label>
-          <input
-            type="date"
-            name="expirationDate"
-            className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-          />
+          <div>
+            <label className="mb-1 block text-sm font-medium text-slate-700">
+              Expiration Date
+            </label>
+            <input
+              type="date"
+              name="expirationDate"
+              className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            />
+          </div>
         </div>
       </div>
 

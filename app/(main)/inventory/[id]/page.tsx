@@ -82,7 +82,7 @@ export default async function ContainerDetailPage({ params }: Props) {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-xs">
+          <div className="flex flex-wrap gap-4 md:justify-around text-xs">
             <div>
               <span className="text-gray-400 block font-medium">
                 Container Type
@@ -97,6 +97,20 @@ export default async function ContainerDetailPage({ params }: Props) {
               </span>
               <span className="font-semibold text-gray-800">
                 {container.bin || "N/A"}
+              </span>
+            </div>
+            <div>
+              <span className="text-gray-400 block font-medium">Supplier</span>
+              <span className="font-semibold text-gray-800 font-mono">
+                {container.substance.supplier || "N/A"}
+              </span>
+            </div>
+            <div>
+              <span className="text-gray-400 block font-medium">
+                Manufacturer
+              </span>
+              <span className="font-semibold text-gray-800 font-mono">
+                {container.substance.manufacturer || "N/A"}
               </span>
             </div>
             <div>
