@@ -2,7 +2,7 @@
 
 This is a [Next.js](https://nextjs.org) project for logging inventory usage.
 
-Required dependencies: sqlite, nodejs or bun
+Required programs: git, sqlite, nodejs or bun (pick either nodejs or bun)
 
 [Sqlitebrowser](https://sqlitebrowser.org/) is also recommended to edit the db, which is stored in data.db in this folder (need to build first).
 
@@ -58,6 +58,12 @@ bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result (it's on port 3000).
+
+## Import from csv
+
+The db seed command also can read from a csv file to import counts into the database. You can export an excel spreadsheet into prisma/data/data.csv and then run `npx prisma db seed`. The headers for the spreadsheet must be lotNumber, materialType, productName, unit, dateAdded, receivedDate, expirationDate, container (container type), and initialNet.
+
+Things with multiple containers or gross/tare weights should be entered in manually.
 
 ## Learn More
 
