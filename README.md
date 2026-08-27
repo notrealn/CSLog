@@ -2,17 +2,50 @@
 
 This is a [Next.js](https://nextjs.org) project for logging inventory usage.
 
-Required programs: sqlite, node+npm/bun, nextjs, pm2
+Required dependencies: sqlite, nodejs or bun
+
+[Sqlitebrowser](https://sqlitebrowser.org/) is also recommended to edit the db, which is stored in data.db in this folder (need to build first).
 
 ## Getting Started
 
-To start the acutal server:
+First, clone this repo and install everything by running:
 
 ```bash
-pm2 start ./node_modules/next/dist/bin/next --name "cslog" -- start
+npm install
+# or
+bun i
 ```
 
-Dev server:
+Build the required files:
+
+```bash
+npm run build
+# or
+bun run build
+```
+
+Create a `.env` file in accordance to `.env.example`. Then seed the db (required to setup admin account):
+
+```bash
+npx prisma db seed
+# or
+bunx prisma db seed
+```
+
+To start the production server:
+
+```bash
+npm start
+# or
+bun start
+
+# Background version
+npm pm2start
+# or
+bun pm2start
+```
+
+Dev server (for development only):
 
 ```bash
 npm run dev
@@ -24,11 +57,7 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result (it's on port 3000).
 
 ## Learn More
 

@@ -36,43 +36,49 @@ async function main() {
     ),
   );
 
-  createReadStream(path.resolve(__dirname, "data", "data.csv"))
-    .pipe(parse({ headers: true }))
-    .on("error", (err) => console.error(err))
-    .on("data", (data) => {
-      prisma.$transaction(async (tx) => {
-        const existing = await tx.substance.findFirst({
-          where: {
-            lotNumber: data.lotNumber as string,
-            dateAdded: parseDate(data.dateAdded),
-            unit: data.unit,
-          },
-        });
+  try {
+    createReadStream(path.resolve(__dirname, "data", "data.csv"))
+      .on("error", (err) => console.error(err))
+      .pipe(parse({ headers: true }))
+      .on("error", (err) => console.error(err))
+      .on("data", (data) => {
+        prisma.$transaction(async (tx) => {
+          const existing = await tx.substance.findFirst({
+            where: {
+              lotNumber: data.lotNumber as string,
+              dateAdded: parseDate(data.dateAdded),
+              unit: data.unit,
+            },
+          });
 
-        if (existing) return;
+          if (existing) return;
 
-        const substance = await tx.substance.create({
-          data: {
-            lotNumber: data.lotNumber,
-            materialType: data.materialType,
-            productName: data.productName,
-            unit: data.unit,
-            dateAdded: new Date(),
-            receivedDate: parseDate(data.receivedDate),
-            expirationDate: parseDate(data.expirationDate),
-          },
-        });
+          const substance = await tx.substance.create({
+            data: {
+              lotNumber: data.lotNumber,
+              materialType: data.materialType,
+              productName: data.productName,
+              unit: data.unit,
+              dateAdded: new Date(),
+              receivedDate: parseDate(data.receivedDate),
+              expirationDate: parseDate(data.expirationDate),
+            },
+          });
 
-        await tx.container.create({
-          data: {
-            container: data.container,
-            initialNet: data.initialNet,
-            substanceId: substance.id,
-          },
+          await tx.container.create({
+            data: {
+              container: data.container,
+              initialNet: data.initialNet,
+              substanceId: substance.id,
+            },
+          });
         });
-      });
-    })
-    .on("end", (rows: number) => console.log(`parsed ${rows} rows.`));
+      })
+      .on("end", (rows: number) => console.log(`parsed ${rows} rows.`));
+  } catch (e) {
+    console.log("failed to parse data.csv:");
+    console.error(e);
+  }
 }
 
 const months: { [month: string]: number } = {

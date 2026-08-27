@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "prisma migrate deploy && prisma generate && next build",
     "start": "next start",
+    "pm2start": "pm2 start ./node_modules/next/dist/bin/next --name \"cslog\" -- start",
     "lint": "eslint"
   },
   "dependencies": {
@@ -28,6 +29,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.10",
+    "pm2": "^7.0.4",
     "prisma": "^7.9.1",
     "tailwindcss": "^4",
     "tsx": "^4.23.1",
